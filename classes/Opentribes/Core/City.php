@@ -5,9 +5,9 @@ class City extends Object {
 
         protected $buildings = array();
 
-        protected $building_types = array();
+        protected $buildingTypes = array();
 
-        protected $resource_types = array();
+        protected $resourceTypes = array();
 
         protected $resources = array();
 
@@ -15,39 +15,39 @@ class City extends Object {
 
         protected $queue = array();
 
-        public function add_building(Building $building)
+        public function addBuilding(Building $building)
         {
-                $building->assign_city($this);
-                $this->buildings[$building->get_name()] = $building;
-                if (!isset($this->building_types[$building->get_type()]))
+                $building->assignCity($this);
+                $this->buildings[$building->name()] = $building;
+                if (!isset($this->buildingTypes[$building->type()]))
                 {
-                        $this->building_types[$building->get_type()] = array();
+                        $this->buildingTypes[$building->type()] = array();
                 }
 
-                $this->building_types[$building->get_type()][] = $building->get_name();
+                $this->buildingTypes[$building->type()][] = $building->name();
         }
 
-        public function add_resource(Resource $resource)
+        public function addResource(Resource $resource)
         {
-                $this->resources[$resource->get_name()] = $resource;
-                if (!isset($this->resource_types[$resource->get_type()]))
+                $this->resources[$resource->name()] = $resource;
+                if (!isset($this->resourceTypes[$resource->type()]))
                 {
-                        $this->resource_types[$resource->get_type()] = array();
+                        $this->resourceTypes[$resource->type()] = array();
                 }
 
-                $this->resource_types[$resource->get_type()][] = $resource->get_name();
+                $this->resourceTypes[$resource->type()][] = $resource->name();
         }
 
-        public function set_owner(Player $player)
+        public function owner(Player $player = null)
         {
-                $this->owner = $player;
-        }
-
-        public function get_owner()
-        {
+                if($player){
+                           $this->owner = $player;
+                           return $this;
+                }
                 return $this->player;
         }
 
+    
         public function attach_queue(Building $building)
         {
                 $this->queue[$building->get_build_end()] = $building;
@@ -63,14 +63,14 @@ class City extends Object {
                 return $this->queue;
         }
 
-        public function get_resource($resource_name)
+        public function getResource($resourceName)
         {
-                return isset($this->resources[$resource_name]) ? $this->resources[$resource_name] : NULL;
+                return isset($this->resources[$resourceName]) ? $this->resources[$resourceName] : NULL;
         }
 
-        public function get_building($building_name)
+        public function getBuilding($buildingName)
         {
-                return isset($this->buildings[$building_name]) ? $this->buildings[$building_name] : NULL;
+                return isset($this->buildings[$buildingName]) ? $this->buildings[$buildingName] : NULL;
         }
 
         public function buildings()
@@ -98,22 +98,26 @@ class City extends Object {
 
                 return $total;
         }
-
-        public function get_buildings_by_type($type)
+        public function getBuildingTypes(){
+                return $this->buildingTypes;
+        }
+        public function getBuildingsByType($type)
         {
+                if(!isset($this->buildingTypes[$type])) return array();
                 $buildings = array();
-                foreach ($this->building_types[$type]as $building)
+               
+                foreach ($this->buildingTypes[$type]as $building)
                 {
                         $buildings[] = $this->buildings[$building];
                 }
                 return $buildings;
         }
 
-        public function get_resource_by_type($type)
+        public function getResourceByType($type)
         {
-
+                if(!isset($this->resourceTypes[$type])) return null;
                 $resources = array();
-                foreach ($this->resource_types[$type] as $resource)
+                foreach ($this->resourceTypes[$type] as $resource)
                 {
                         $resources[] = $this->resources[$resource];
                 }

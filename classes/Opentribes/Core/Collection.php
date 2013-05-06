@@ -31,8 +31,8 @@ class Collection {
                                         $configObj->$name = $value;
                                 }
                                 $obj = $factory->create($type, $configObj);
-                                $obj->set_name($building_name);
-                                $obj->set_type($type);
+                                $obj->name($building_name);
+                                $obj->type($type);
                                 $this->set(self::BUILDINGS, $obj);
                         }
                 }
@@ -52,8 +52,8 @@ class Collection {
                                         $configObj->$name = $value;
                                 }
                                 $obj = $factory->create($type, $configObj);
-                                $obj->set_name($resource_name);
-                                $obj->set_type($type);
+                                $obj->name($resource_name);
+                                $obj->type($type);
                                 $this->set(self::RESOURCES, $obj);
                         }
                 }
@@ -61,7 +61,7 @@ class Collection {
 
         private function set($type, Object $object)
         {
-                $this->_collection[$type][$object->get_name()] = $object;
+                $this->_collection[$type][$object->name()] = $object;
         }
 
         public function get($type = NULL, $object = NULL)
@@ -71,7 +71,7 @@ class Collection {
                 if ($type && $object)
                 {
                         $name = $object;
-                        if ($object instanceof Object) $name = $object->get_name();
+                        if ($object instanceof Object) $name = $object->name();
 
                         if (isset($this->_collection[$type][$name]))
                         {

@@ -1,8 +1,8 @@
 <?php
 namespace Opentribes\Core\Building\Type;
 
-use Opentribes\Core\Building,
-Opentribes\Core\Resource;
+use Opentribes\Core\Building;
+use Opentribes\Core\Resource;
 
 class Storage extends Building{
 
@@ -13,31 +13,34 @@ class Storage extends Building{
 
       
 
-        public function add_resource(Resource $resource)
+        public function addResource(Resource $resource)
         {
-                $this->city->add_resource($resource);
+                $this->city->addResource($resource);
         }
 
-        public function set_capacity($capacity){
-                $this->capacity = $capacity;
-        }
-        public function get_capacity(){
+    
+        public function capacity($capacity = null){
+                if($capacity){
+                        $this->capacity = $capacity;
+                        return $this;
+                }
+                return $this->capacity;
                 $level = max($this->get_level() -1,0);
                 $value = round($this->capacity['value'] * pow($this->capacity['factor'],$level));
                 return $value;
         }
 
-        public function set_value(Resource $resource, $value)
+        public function setValueForResource(Resource $resource, $value)
         {
-                if (($res =$this->city->get_resource($resource->get_name())))
+                if (($res =$this->city->getResource($resource->name())))
                 {      
-                        $total=$res->get_value()+$value;
-                        if ( $total >= $this->get_capacity())
+                        $total=$res->value()+$value;
+                        if ( $total >= $this->capacity())
                         {
-                                $total = $this->get_capacity();
+                                $total = $this->capacity();
                         }
 
-                        $res->set_value($total);
+                        $res->value($total);
                         
                         return TRUE;
                 }

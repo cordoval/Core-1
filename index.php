@@ -15,7 +15,7 @@ use Opentribes\Core\Collection,
 
 
 $player = new Player();
-$player->set_name('BlackScorp');
+$player->name('BlackScorp');
 
 if (!isset($_SESSION['base_city']))
 {
@@ -33,20 +33,26 @@ $collection->init_resources($resources);
 $city       = new City();
 foreach ($collection->get(Collection::BUILDINGS) as $building)
 {
-        $city->add_building(clone $building);
+        $city->addBuilding(clone $building);
 }
 foreach ($collection->get(Collection::RESOURCES) as $resource)
 {
-        foreach ($city->get_buildings_by_type($resource->get_storage()) as $building)
+        foreach ($city->getBuildingsByType($resource->storage()) as $building)
         {
-                $building->add_resource(clone $resource);
+                $building->addResource(clone $resource);
         }
 }
 
 
-$player_city = clone $city;
-$player_city->set_name('Village');
-$player->add_city($player_city);
+$playerCity = clone $city;
+$playerCity->name('Village');
+$player->addCity($playerCity);
+foreach($playerCity->resources() as $resource){
+        foreach($playerCity->getBuildingsByType($resource->storage()) as $building){
+               $building->setValueForResource($resource,200); 
+        }
+}
+
 /*
 $storage = $player_city->get_building('Storage');
 $farm    = $player_city->get_building('Farm');
@@ -66,4 +72,4 @@ $main = $player_city->get_building('Main');
 
 $main->upgrade();*/
 
-echo '<pre>'.print_r($player_city,true).'</pre>';
+ echo '<pre>'.print_r($playerCity,true).'</pre>';

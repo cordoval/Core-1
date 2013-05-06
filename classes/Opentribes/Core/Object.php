@@ -19,29 +19,24 @@ abstract class Object{
          * Sets the type
          * @param String $type
          */
-        public function set_type($type){
-                $this->type = $type;
+        public function type($type = null){
+                if($type){
+                     $this->type = $type;
+                     return $this;
+                }
+                return $this->type;
         }
         /**
          * Sets the name
          * @param String $name
          */
-        public function set_name($name){
-                $this->name = $name;
-        }
-        //###################Getters###########################
-        /**
-         * Gets the name
-         * @return String $name
-         */
-        public function get_name(){
+        public function name($name = null){
+                if($name){
+                   $this->name = $name;    
+                   return $this;
+                }
+                
                 return $this->name;
         }
-        /**
-         * Get the type
-         * @return String $type
-         */
-        public function get_type(){
-                return $this->type;
-        }
+     
 }

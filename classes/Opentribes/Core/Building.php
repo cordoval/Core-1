@@ -2,6 +2,7 @@
 namespace Opentribes\Core;
 
 use Opentribes\Core\Config;
+
 /**
  * 
  */
@@ -11,45 +12,20 @@ abstract class Building extends Object {
          * The City of the Building
          * @var City $city 
          */
-        protected $city = NULL;
-
-        protected $build = array();
-
-        protected $last_update = 0;
-
-        protected $levels = array();
+        protected $city  = NULL;
 
         protected $level = 0;
 
-        protected $requirements = array();
-
-        protected $costs = array();
-
-        protected $consumptions = array();
         protected $config = null;
+
         public function __construct(Config $config)
         {
                 $this->config = $config;
         }
 
-        public function assign_city(City $city)
+        public function assignCity(City $city)
         {
                 $this->city = $city;
-        }
-
-        public function set_costs($costs)
-        {
-                $this->costs = $costs;
-        }
-
-        public function set_requirements($requirements)
-        {
-                $this->requirements = $requirements;
-        }
-
-        public function set_consumptions($consumptions)
-        {
-                $this->consumptions = $consumptions;
         }
 
         public function get_consumptions($resource_name = NULL)
@@ -58,10 +34,10 @@ abstract class Building extends Object {
                 $level = $this->get_level();
                 if ($resource_name && isset($this->consumptions[$resource_name]))
                 {
-                        $values = $this->consumptions[$resource_name];
-                        $value  = 0;
-                        if ($level > 0) $value  = round($values['value'] * pow($values['factor'], $level - 1));
-                          $consumtions[$resource_name] = $value;
+                        $values                      = $this->consumptions[$resource_name];
+                        $value                       = 0;
+                        if ($level > 0) $value                       = round($values['value'] * pow($values['factor'], $level - 1));
+                        $consumtions[$resource_name] = $value;
                         return $consumtions;
                 }
                 foreach ($this->consumptions as $name=> $values)
@@ -75,36 +51,26 @@ abstract class Building extends Object {
                 return $consumtions;
         }
 
-        public function set_levels($levels)
+        public function level($value = null)
         {
-                $this->levels = $levels;
-        }
 
-        public function set_build($build)
-        {
-                $this->build = $build;
-        }
-
-        public function get_level()
-        {
-                return min(max($this->level, $this->levels['minimum']), $this->levels['maximum']);
-        }
-
-        public function set_level($level)
-        {
-                $this->level = min($level, $this->levels['maximum']);
+                if ($value)
+                {
+                        $this->level = min(max($value, $this->config->level['minimum']), $this->config->level['maximum']);
+                        return true;
+                }
+                return min(max($this->level, $this->config->levels['minimum']), $this->config->levels['maximum']);
         }
 
         public function get_costs($resource_name = NULL)
         {
 
                 $costs = array();
-                $level            = $this->get_level();
+                $level = $this->get_level();
                 $value = 0;
                 foreach ($this->costs as $resource=> $values)
                 {
-                        if($level > 0)
-                        $value            = round($values['value'] * pow($values['factor'], $level-1));
+                        if ($level > 0) $value            = round($values['value'] * pow($values['factor'], $level - 1));
                         $costs[$resource] = (int) $value;
                 }
                 return ($resource_name && isset($costs[$resource_name])) ? $costs[$resource_name] : $costs;
@@ -145,15 +111,16 @@ abstract class Building extends Object {
 
         private function match_consumptions()
         {
-               
+
                 $value = 0;
-                foreach($this->city->get_resource_by_type('Consumer') as $resource){
-                        foreach($this->city->get_buildings_by_type($resource->get_storage()) as $building){
-                                  $value += $building->get_capacity();
+                foreach ($this->city->get_resource_by_type('Consumer') as $resource)
+                {
+                        foreach ($this->city->get_buildings_by_type($resource->get_storage()) as $building)
+                        {
+                                $value += $building->get_capacity();
                         }
-                      
                 }
-         
+
                 return TRUE;
         }
 
@@ -184,6 +151,11 @@ abstract class Building extends Object {
                         }
                 }
                 return $result;
+        }
+
+        public function configs()
+        {
+                return $this->config;
         }
 
 }
