@@ -6,12 +6,8 @@ use Opentribes\Core\Resource;
 
 class Storage extends Building{
 
-  
 
-        private $capacity = array();
-
-
-      
+        private $capacity = 0;
 
         public function addResource(Resource $resource)
         {
@@ -35,9 +31,10 @@ class Storage extends Building{
                 if (($res =$this->city->getResource($resource->name())))
                 {      
                         $total=$res->value()+$value;
-                        if ( $total >= $this->capacity())
+                        $capcity = $this->capacity();
+                        if ( $total >= $capcity)
                         {
-                                $total = $this->capacity();
+                                $total = $capcity;
                         }
 
                         $res->value($total);
@@ -46,12 +43,10 @@ class Storage extends Building{
                 }
                 return FALSE;
         }
-        public function get_free_capacity(){
-                $total = 0;
-                foreach($this->city->resources() as $resource){
-                        $total+=$resource->get_value();
-                }
-                return $this->get_capacity()-$total;
+        public function update()
+        {       $level = $this->level();
+                $this->capacity =  round($this->config->capacity['value'] * pow($this->config->capacity['factor'],$level-1));
+                parent::update() ;
         }
 
       

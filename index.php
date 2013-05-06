@@ -13,21 +13,9 @@ use Opentribes\Core\Collection,
 //Init Objects
 
 
-
-$player = new Player();
-$player->name('BlackScorp');
-
-if (!isset($_SESSION['base_city']))
-{
-        //hier kommt die collections und add buildings etc rein
-        // $_SESSION['base_city'] = serialize($city);
-}
-else
-{
-        $city       = unserialize($_SESSION['base_city']);
-}
+//Configs
 $collection = new Collection();
-$collection->init_buildings($buildings);
+$collection->init_buildings($buildings); 
 $collection->init_resources($resources);
 //create default city with configs;
 $city       = new City();
@@ -42,19 +30,29 @@ foreach ($collection->get(Collection::RESOURCES) as $resource)
                 $building->addResource(clone $resource);
         }
 }
-
+//data from DB
+$player = new Player();
+$player->name('BlackScorp');
 
 $playerCity = clone $city;
 $playerCity->name('Village');
+
 $player->addCity($playerCity);
+
+foreach($playerCity->buildings() as $building){
+     //   $building->level(1);
+      //  $building->update();
+}
 foreach($playerCity->resources() as $resource){
         foreach($playerCity->getBuildingsByType($resource->storage()) as $building){
                $building->setValueForResource($resource,200); 
         }
 }
 
+
+$storage = $playerCity->getBuilding('Storage');
+$storage->level(20)->update();
 /*
-$storage = $player_city->get_building('Storage');
 $farm    = $player_city->get_building('Farm');
 
 $wood = $player_city->get_resource('Wood');
@@ -72,4 +70,5 @@ $main = $player_city->get_building('Main');
 
 $main->upgrade();*/
 
- echo '<pre>'.print_r($playerCity,true).'</pre>';
+ echo '<pre>'.print_r($storage->costs(),true).'</pre>';
+  echo '<pre>'.print_r($storage->capacity(),true).'</pre>';

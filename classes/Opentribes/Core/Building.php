@@ -12,26 +12,32 @@ abstract class Building extends Object {
          * The City of the Building
          * @var City $city 
          */
-        protected $city  = NULL;
+        protected $city = NULL;
 
         protected $level = 0;
 
         protected $config = null;
 
+        protected $consumption = array();
+
+        protected $costs = array();
+
         public function __construct(Config $config)
         {
                 $this->config = $config;
+                return $this;
         }
 
         public function assignCity(City $city)
         {
                 $this->city = $city;
+                return $this;
         }
 
-        public function get_consumptions($resource_name = NULL)
+        public function getConsumptions($resourceName = NULL)
         {
                 $consumtions = array();
-                $level = $this->get_level();
+                $level = $this->level();
                 if ($resource_name && isset($this->consumptions[$resource_name]))
                 {
                         $values                      = $this->consumptions[$resource_name];
@@ -51,29 +57,27 @@ abstract class Building extends Object {
                 return $consumtions;
         }
 
-        public function level($value = null)
+        public function level($level = null)
         {
-
-                if ($value)
+          
+             
+                if ($level)
                 {
-                        $this->level = min(max($value, $this->config->level['minimum']), $this->config->level['maximum']);
-                        return true;
+                      
+                        $this->level = min(max($level, $this->config->levels['minimum']), $this->config->levels['maximum']);
+                   
+                        return $this;
                 }
+                   
                 return min(max($this->level, $this->config->levels['minimum']), $this->config->levels['maximum']);
         }
 
-        public function get_costs($resource_name = NULL)
+        public function costs($resourceName = NULL)
         {
 
-                $costs = array();
-                $level = $this->get_level();
-                $value = 0;
-                foreach ($this->costs as $resource=> $values)
-                {
-                        if ($level > 0) $value            = round($values['value'] * pow($values['factor'], $level - 1));
-                        $costs[$resource] = (int) $value;
-                }
-                return ($resource_name && isset($costs[$resource_name])) ? $costs[$resource_name] : $costs;
+               if($resourceName && isset($this->costs[$resourceName])) return $this->costs[$resourceName];
+               return $this->costs;
+            
         }
 
         public function get_build_end()
@@ -151,6 +155,20 @@ abstract class Building extends Object {
                         }
                 }
                 return $result;
+        }
+
+        public function update()
+        {
+                $level = $this->level();
+                $value = 0;
+                foreach ($this->config->costs as $resource=> $values)
+                {
+                 
+                        if ($level > 0) $value = round($values['value'] * pow($values['factor'], $level - 1));
+
+                        $this->costs[$resource] = $value;
+                }
+                return $this;
         }
 
         public function configs()
