@@ -54,7 +54,7 @@ foreach ($playerCity->resources() as $resource)
 $storage = $playerCity->getBuilding('Storage');
   $main = $playerCity->getBuilding('Main');
     $farm    = $playerCity->getBuilding('Farm');
-
+    $woodBuilding = $playerCity->getBuilding('Wood');
 
 
 
@@ -68,11 +68,13 @@ $storage = $playerCity->getBuilding('Storage');
   $storage->setValueForResource($stone, 100);
   $storage->setValueForResource($iron, 100);
 
-  $farm->setValueForResource($population,0);
-$storage->level(20);
-$main->level(20)->update();
+  $farm->setValueForResource($population,240);
+  
+$storage->level(1);
 
+$main->level(2);
+$woodBuilding->level(2);
 
- echo '<pre>'.print_r($main->consumptions(),true).'</pre>';
+ echo '<pre>'.print_r($playerCity->getConsumptions(),true).'</pre>';
 
 ?>

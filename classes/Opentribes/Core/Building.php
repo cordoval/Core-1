@@ -83,6 +83,7 @@ abstract class Building extends Object {
         {
 
                 if ($resourceName && isset($this->consumptions[$resourceName])) return $this->consumptions[$resourceName];
+            
                 return $this->consumptions;
         }
 
