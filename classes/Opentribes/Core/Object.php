@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Base Game Object
+ * 
+ * @package    Opentribes
+ * @category   Core
+ * @author     Witali Mik
+ * @copyright  (c) 2013
+ * @license    http://opensource.org/licenses/MIT
+ */
 namespace Opentribes\Core;
 
 abstract class Object{

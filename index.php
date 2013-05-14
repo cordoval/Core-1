@@ -13,8 +13,8 @@ use Opentribes\Core\Collection,
 //Init Objects
 //Configs
 $collection = new Collection();
-$collection->init_buildings($buildings);
-$collection->init_resources($resources);
+$collection->initBuildings($buildings);
+$collection->initResources($resources);
 //create default city with configs;
 $city       = new City();
 foreach ($collection->get(Collection::BUILDINGS) as $building)
@@ -75,6 +75,6 @@ $storage->level(1);
 $main->level(2);
 $woodBuilding->level(2);
 
- echo '<pre>'.print_r($playerCity->getConsumptions(),true).'</pre>';
+ echo '<pre>'.print_r($playerCity,true).'</pre>';
 
 ?>

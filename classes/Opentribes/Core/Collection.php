@@ -1,20 +1,56 @@
 <?php
+/**
+ * Game Object collection class, converts configuration arrays into Objects 
+ * 
+ * @package    Opentribes
+ * @category   Core
+ * @author     Witali Mik
+ * @copyright  (c) 2013
+ * @license    http://opensource.org/licenses/MIT
+ */
 namespace Opentribes\Core;
 
-use Opentribes\Core\Building\Factory as Building_Factory,
-    Opentribes\Core\Resource\Factory as Resource_Factory;
+use Opentribes\Core\Building\Factory as Building_Factory;
+use Opentribes\Core\Resource\Factory as Resource_Factory;
 
 class Collection {
-
+        /**
+         * Collection Type Buildings
+         */
         const BUILDINGS = 'buildings';
-
+        /**
+         * Collection Type Resources
+         */
         const RESOURCES = 'resources';
-
+        /**
+         * Collection Type Units
+         */
         const UNITS = 'units';
-
+        /**
+         * Collection of Class Instances
+         * @var Array $_collection 
+         */
         private $_collection = array();
 
-        public function init_buildings(array $config)
+        /**
+         * Create Building instaces
+         * @param array $config
+         * @example
+         * <code><pre>
+         * <?php
+         * //Example array 
+         * $buildings = array(
+         *      'Namespace\\Type'=>array( //Type must exists in Core\\Building\\Type
+         *              'BuildingName'=>array( //each Building has Configurations
+         *                      'PropertyName' => array(
+         *                                'ValueName'=>'Value'
+         *                       )
+         *               )
+         *       )
+         * );
+         * </pre></code>
+         */
+        public function initBuildings(array $config)
         {
 
 
@@ -38,7 +74,7 @@ class Collection {
                 }
         }
 
-        public function init_resources(array $config)
+        public function initResources(array $config)
         {
                 $factory = new Resource_Factory(array_keys($config));
 
@@ -59,7 +95,7 @@ class Collection {
                 }
         }
 
-        private function set($type, Object $object)
+        public function set($type, Object $object)
         {
                 $this->_collection[$type][$object->name()] = $object;
         }
