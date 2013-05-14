@@ -11,11 +11,9 @@ use Opentribes\Core\Collection,
     Opentribes\Core\City;
 
 //Init Objects
-
-
 //Configs
 $collection = new Collection();
-$collection->init_buildings($buildings); 
+$collection->init_buildings($buildings);
 $collection->init_resources($resources);
 //create default city with configs;
 $city       = new City();
@@ -39,36 +37,42 @@ $playerCity->name('Village');
 
 $player->addCity($playerCity);
 
-foreach($playerCity->buildings() as $building){
-     //   $building->level(1);
-      //  $building->update();
+foreach ($playerCity->buildings() as $building)
+{
+        //   $building->level(1);
+        //  $building->update();
 }
-foreach($playerCity->resources() as $resource){
-        foreach($playerCity->getBuildingsByType($resource->storage()) as $building){
-               $building->setValueForResource($resource,200); 
+foreach ($playerCity->resources() as $resource)
+{
+        foreach ($playerCity->getBuildingsByType($resource->storage()) as $building)
+        {
+                $building->setValueForResource($resource, 200);
         }
 }
 
 
 $storage = $playerCity->getBuilding('Storage');
-$storage->level(20)->update();
-/*
-$farm    = $player_city->get_building('Farm');
+  $main = $playerCity->getBuilding('Main');
+    $farm    = $playerCity->getBuilding('Farm');
 
-$wood = $player_city->get_resource('Wood');
-$stone = $player_city->get_resource('Stone');
-$iron = $player_city->get_resource('Iron');
-$population = $player_city->get_resource('Population');
 
-$storage->set_value($wood, 100);
-$storage->set_value($stone, 100);
-$storage->set_value($iron, 100);
 
-$farm->set_value($population,0);
 
-$main = $player_city->get_building('Main');
+  $wood = $playerCity->getResource('Wood');
+  $stone = $playerCity->getResource('Stone');
+  $iron = $playerCity->getResource('Iron');
+  $population = $playerCity->getResource('Population');
 
-$main->upgrade();*/
+  
+  $storage->setValueForResource($wood, 100);
+  $storage->setValueForResource($stone, 100);
+  $storage->setValueForResource($iron, 100);
 
- echo '<pre>'.print_r($storage->costs(),true).'</pre>';
-  echo '<pre>'.print_r($storage->capacity(),true).'</pre>';
+  $farm->setValueForResource($population,0);
+$storage->level(20);
+$main->level(20)->update();
+
+
+ echo '<pre>'.print_r($main->consumptions(),true).'</pre>';
+
+?>

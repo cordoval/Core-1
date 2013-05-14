@@ -90,7 +90,10 @@ class City extends Object {
                 {
                         if ($building->level() > 0)
                         {
-                                foreach ($building->getConsumptions($resourceName) as $resource=> $value)
+                               
+                                $building->update();
+                               
+                                foreach ($building->consumptions() as $resource=> $value)
                                 {
                                         if (!isset($consumtion[$resource])) $consumtion[$resource] = 0;
                                         $consumtion[$resource]+=(int) $value;

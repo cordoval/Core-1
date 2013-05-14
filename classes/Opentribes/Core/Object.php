@@ -38,5 +38,8 @@ abstract class Object{
                 
                 return $this->name;
         }
-     
+        
+        public function debug(){
+                echo '<pre>'.print_r($this,true).'</pre>';
+        }
 }
