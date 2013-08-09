@@ -2,7 +2,6 @@
     "minimum-stability": "dev",
     "description": "A Tribal Wars Core Module",
     "keywords": ["Tribal Wars", "Open Source", "Browsergame"],
-    "homepage": "coming soon",
     "license": "MIT",
     "authors": [
         {
