@@ -13,6 +13,7 @@ class Module implements ServiceProviderInterface {
 
     public function register(Application $app) {
         //module services
+        echo __DIR__."/config/test.php";
         $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
         $app->register(new \Mustache\Silex\Provider\MustacheServiceProvider());
         $app['renderer'] = $app['mustache'];
