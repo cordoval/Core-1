@@ -9,7 +9,7 @@
             "email": "witalimik@web.de"
         }
     ],
-    "name": "OpenTribes/Core",
+    "name": "opentribes/core",
     "require": {
         "php": ">=5.3.0",
         "silex/silex": "1.1.*@dev",
