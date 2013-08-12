@@ -4,6 +4,8 @@ namespace OpenTribes\Core;
 
 use \Silex\Application;
 use \Silex\ServiceProviderInterface;
+use \Mustache\Silex\Provider\MustacheServiceProvider;
+use \Silex\Provider\ServiceControllerServiceProvider;
 
 class Module implements ServiceProviderInterface {
 
@@ -13,9 +15,9 @@ class Module implements ServiceProviderInterface {
 
     public function register(Application $app) {
         //module services
-        echo __DIR__."/config/test.php";
-        $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
-        $app->register(new \Mustache\Silex\Provider\MustacheServiceProvider());
+
+        $app->register(new ServiceControllerServiceProvider());
+        $app->register(new MustacheServiceProvider());
         $app['renderer'] = $app['mustache'];
         //Controllers
 
@@ -25,7 +27,11 @@ class Module implements ServiceProviderInterface {
         $app['index.view'] = $app->share(function() use($app) {
                     return new View\Index($app);
                 });
+        $app['assets.controller'] = $app->share(function() use($app) {
+                    return new Controller\Asset($app);
+                });
         $app->get('/', 'index.controller:indexAction');
+      
         return $app;
     }
 
