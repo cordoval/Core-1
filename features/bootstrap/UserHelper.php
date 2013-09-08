@@ -54,20 +54,7 @@ class UserHelper {
         $this->roleRepository->save($admin);
     }
 
-    private function initPlayers() {
-        $playerId = 0;
-        $player = new Player();
-        $playerId++;
-        $player->setId($playerId);
-        $player->setUsername('BlackScorp');
-        $player->setPassword($this->hasher->hash('123456'));
-        $player->setEmail('test@test.de');
-        $roles = new PlayerRoles();
-        $roles->addRole($this->roleRepository->findByName('Player'));
-        $player->setRoles($roles);
-
-        $this->playerRepository->save($player);
-    }
+  
 
     public function __construct() {
         $this->roleRepository = new RoleRepository();
@@ -100,8 +87,10 @@ class UserHelper {
             $player->setId($row['id']);
             $player->setPassword($this->hasher->hash($row['password']));
             $player->setEmail($row['email']);
-           
             $player->setActivationCode($row['activation_code']);
+            $roles = new PlayerRoles();
+            $roles->addRole($this->roleRepository->findByName('Player'));
+            $player->setRoles($roles);
             $this->playerRepository->save($player);
         }
     }
@@ -120,7 +109,7 @@ class UserHelper {
     }
 
     public function login(array $data) {
-        $this->initPlayers();
+
         foreach ($data as $row) {
             $request = new PlayerLoginRequest($row['username'], $row['password']);
         }
