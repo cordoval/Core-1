@@ -147,5 +147,36 @@ class FeatureContext extends BehatContext {
         $this->userHelper->assertHasRole($arg1);
     }
 
+        /**
+     * @When /^i request the code with following informations$/
+     */
+    public function iRequestTheCodeWithFollowingInformations(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^a recovery mail should be created$/
+     */
+    public function aRecoveryMailShouldBeCreated()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^the mail should be send$/
+     */
+    public function theMailShouldBeSend()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^i should have a recovery code$/
+     */
+    public function iShouldHaveARecoveryCode()
+    {
+        throw new PendingException();
+    }
 
 }
