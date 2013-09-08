@@ -1,9 +1,9 @@
 <?php
 
-namespace OpenTribes\Core\Player;
+namespace OpenTribes\Core\Player\ActivationMail\View;
 
 use OpenTribes\Core\Player;
-class ActivationMail{
+class Mail{
 
     protected $_player;
     public function __construct(Player $player) {

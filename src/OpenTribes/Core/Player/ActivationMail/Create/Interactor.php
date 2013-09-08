@@ -4,7 +4,7 @@ namespace OpenTribes\Core\Player\ActivationMail\Create;
 
 use OpenTribes\Core\Player\Repository as PlayerRepository;
 use OpenTribes\Core\Util\CodeGenerator;
-use OpenTribes\Core\Player\ActivationMail;
+use OpenTribes\Core\Player\ActivationMail\View\Mail;
 
 class Interactor{
     protected $_playerRepository;
@@ -21,6 +21,6 @@ class Interactor{
         $this->_playerRepository->save($player);
         
         
-        return new Response(new ActivationMail($player));
+        return new Response(new Mail($player));
     }
 }
