@@ -19,6 +19,7 @@ use OpenTribes\Core\Player\ActivationMail\Send\Request as SendActivationMailRequ
 use OpenTribes\Core\Player\ActivationMail\Send\Interactor as SendActivationMailInteractor;
 use OpenTribes\Core\Player\Activate\Request as PlayerActivateRequest;
 use OpenTribes\Core\Player\Activate\Interactor as PlayerActivateInteractor;
+
 require_once 'vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
 
 class UserHelper {
@@ -97,8 +98,9 @@ class UserHelper {
             $player = new Player();
             $player->setUsername($row['username']);
             $player->setId($row['id']);
-            $player->setPassword($row['password']);
+            $player->setPassword($this->hasher->hash($row['password']));
             $player->setEmail($row['email']);
+           
             $player->setActivationCode($row['activation_code']);
             $this->playerRepository->save($player);
         }
@@ -167,7 +169,7 @@ class UserHelper {
     public function activateAccount(array $data) {
         $role = $this->roleRepository->findByName('Player');
         foreach ($data as $row) {
-            $request = new PlayerActivateRequest($row['username'], $row['activation_code'],$role);
+            $request = new PlayerActivateRequest($row['username'], $row['activation_code'], $role);
         }
 
         $interactor = new PlayerActivateInteractor($this->playerRepository, $this->playerRolesRepository);
@@ -177,12 +179,18 @@ class UserHelper {
             $this->exception = $e;
         }
     }
-    public function assertActivated(){
+
+    public function assertActivated() {
         $player = $this->response->getPlayer();
         assertInstanceOf('\OpenTribes\Core\Player\Activate\Response', $this->response);
         assertEmpty($player->getActivationCode());
-        
     }
+
+    public function assertHasRole($role) {
+        $player = $this->response->getPlayer();
+        assertTrue($player->getRoles()->hasRole($role));
+    }
+
 }
 
 ?>

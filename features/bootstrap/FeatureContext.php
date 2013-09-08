@@ -139,6 +139,13 @@ class FeatureContext extends BehatContext {
        $this->userHelper->newUser();
     }
   
+       /**
+     * @Given /^i should have "([^"]*)" roles$/
+     */
+    public function iShouldHaveRoles($arg1)
+    {
+        $this->userHelper->assertHasRole($arg1);
+    }
 
 
 }

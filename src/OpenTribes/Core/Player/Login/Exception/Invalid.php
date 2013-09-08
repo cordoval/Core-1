@@ -2,4 +2,4 @@
 
 namespace OpenTribes\Core\Player\Login\Exception;
 
-class PlayerNotFound extends \Exception{}
+class Invalid extends \Exception{}
