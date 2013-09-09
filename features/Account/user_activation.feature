@@ -12,7 +12,7 @@ Scenario: activate valid account
         | username | activation_code |
         | BlackScorp | qwerty  | 
     Then I should be activated
-    And i should have "Player" roles
+    And I should have "Player" roles
 
 Scenario: invalid activation code
     Given user with follwoing informations:
