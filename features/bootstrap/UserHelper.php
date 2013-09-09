@@ -19,7 +19,7 @@ use OpenTribes\Core\Player\ActivationMail\Send\Request as SendActivationMailRequ
 use OpenTribes\Core\Player\ActivationMail\Send\Interactor as SendActivationMailInteractor;
 use OpenTribes\Core\Player\Activate\Request as PlayerActivateRequest;
 use OpenTribes\Core\Player\Activate\Interactor as PlayerActivateInteractor;
-
+use OpenTribes\Core\Player\Factory as PlayerFactory;
 require_once 'vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
 
 class UserHelper {
@@ -34,7 +34,7 @@ class UserHelper {
 
     public function __construct() {
         $this->roleRepository = new RoleRepository();
-        $this->playerRepository = new PlayerRepository();
+        $this->playerRepository = new PlayerRepository(new PlayerFactory);
         $this->playerRolesRepository = new PlayerRolesRepository();
         $this->hasher = new MockHasher();
         $this->codeGenerator = new MockCodeGenerator();

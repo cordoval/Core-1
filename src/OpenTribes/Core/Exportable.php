@@ -15,19 +15,19 @@ abstract class Exportable{
      /**
       * @return Json $entity exports entity as json object
       */
-    public function toJson() {
+    public function asJson() {
         return json_encode($this->toArray());
     }
     /**
      * @return Array $entity exports entity as array
      */
-    public function toArray() {
+    public function asArray() {
         return get_object_vars($this);
     }
     /**
      * @return String $entity exports entity as serialized string
      */
-    public function toSerializedString(){
+    public function asSerializedString(){
         return serialize($this);
     }
 }

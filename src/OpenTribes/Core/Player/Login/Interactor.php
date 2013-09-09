@@ -25,7 +25,7 @@ class Interactor {
     public function __invoke(Request $request) {
         $password = $this->_hasher->hash($request->getPassword());
         //Create dummy player to ensure user input
-        $dummyPlayer = new Player();
+        $dummyPlayer = $this->_playerRepository->create();
         $dummyPlayer->setPassword($request->getPassword());
         $dummyPlayer->setUsername($request->getUsername());
         

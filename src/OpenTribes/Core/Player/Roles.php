@@ -4,28 +4,28 @@ namespace OpenTribes\Core\Player;
 
 use OpenTribes\Core\Entity;
 use OpenTribes\Core\Role;
-use OpenTribes\COre\Player;
+use OpenTribes\Core\Player;
 class Roles extends Entity{
-    protected $_roles = array();
-    protected $_player = array();
+    protected $roles = array();
+    protected $player = array();
     public function setPlayer(Player $player){
-        $this->_player = $player;
+        $this->player = $player;
     }
 
     public function addRole(Role $role){
-        $this->_roles[$role->getName()] = $role;
+        $this->roles[$role->getName()] = $role;
     }
     public function removeRole(Role $role){
-        if(isset($this->_roles[$role->getName()])) unset($this->_roles[$role->getName()]);
+        if(isset($this->roles[$role->getName()])) unset($this->roles[$role->getName()]);
     }
     public function getRoles(){
-        return $this->_roles;
+        return $this->roles;
     }
     public function hasRole($name){
-        if(isset($this->_roles[$name])) return true;
+        if(isset($this->roles[$name])) return true;
         return false;
     }
     public function hasAnyRoles(array $roles){
-        return count(array_intersect($this->_roles,$roles)) > 0;
+        return count(array_intersect($this->roles,$roles)) > 0;
     }
 }

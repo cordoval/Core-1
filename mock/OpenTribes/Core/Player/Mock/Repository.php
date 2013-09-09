@@ -9,14 +9,18 @@ use OpenTribes\Core\Player;
 class Repository implements PlayerRepositoryInterface {
 
     private $data = array();
-
-    public function __construct() {
-        
+    private $factory;
+    public function create() {
+        return $this->factory->create();
+    }
+    public function __construct(PlayerFactory $playerFactory) {
+        $this->factory = $playerFactory;
     
     }
 
     public function save(Player $player) {
-        $this->data[$player->getId()] = $player;
+        $this->data[$player->getId()] = $player->asArray();
+       
      
     }
 
@@ -24,26 +28,26 @@ class Repository implements PlayerRepositoryInterface {
         return isset($this->data[$id]) ? $this->data[$id] : false;
     }
    public function findByUsername($username) {
-    
+        
         foreach ($this->data as $player) {
-            if ($player->getUsername() == $username) {
-                return $player;
+            if ($player['username'] == $username) {
+                return $this->factory->createFromArray($player);
             }
         }
       
     }
     public function findByEmail($email) {
         foreach ($this->data as $player) {
-            if ($player->getEmail() == $email) {
-                return $player;
+            if ($player['email']== $email) {
+                return $this->factory->createFromArray($player);
             }
         }
     }
     public function findByName($name) {
     
         foreach ($this->data as $player) {
-            if ($player->getName() == $name) {
-                return $player;
+            if ($player['name'] == $name) {
+                return  $this->factory->createFromArray($player);
             }
         }
       

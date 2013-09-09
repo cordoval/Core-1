@@ -14,20 +14,20 @@ use OpenTribes\Core\Player\Exception\Email\Invalid as EmailInvalidException;
 
 class Player extends Entity {
 
-    protected $_roles = null;
-    protected $_username;
-    protected $_password;
-    protected $_email;
-    protected $_lastAction = 0;
-    protected $_activationCode = null;
+    protected $roles;
+    protected $username;
+    protected $password;
+    protected $email;
+    protected $lastAction;
+    protected $activationCode;
 
     public function setActivationCode($code) {
-        $this->_activationCode = $code;
+        $this->activationCode = $code;
         return $this;
     }
 
     public function setLastAction(\DateTime $lastAction = null) {
-        $this->_lastAction = $lastAction? : new \DateTime();
+        $this->lastAction = $lastAction? : new \DateTime();
         return $this;
     }
 
@@ -37,7 +37,7 @@ class Player extends Entity {
         if (strlen($password) < 6)
             throw new PasswordTooShortException;
 
-        $this->_password = $password;
+        $this->password = $password;
         return $this;
     }
 
@@ -51,7 +51,7 @@ class Player extends Entity {
         if (strlen($username) > 32)
             throw new UserNameTooLongException;
 
-        $this->_username = $username;
+        $this->username = $username;
         return $this;
     }
 
@@ -60,35 +60,35 @@ class Player extends Entity {
             throw new EmailEmptyException;
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             throw new EmailInvalidException;
-        $this->_email = $email;
+        $this->email = $email;
         return $this;
     }
 
     public function setRoles(Roles $roles) {
         $roles->setPlayer($this);
 
-        $this->_roles = $roles;
+        $this->roles = $roles;
         return $this;
     }
 
     public function getRoles() {
-        return $this->_roles;
+        return $this->roles;
     }
 
     public function getUsername() {
-        return $this->_username;
+        return $this->username;
     }
 
     public function getPassword() {
-        return $this->_password;
+        return $this->password;
     }
 
     public function getEmail() {
-        return $this->_email;
+        return $this->email;
     }
 
     public function getActivationCode() {
-        return $this->_activationCode;
+        return $this->activationCode;
     }
 
 }

@@ -19,15 +19,15 @@ abstract class Entity extends Exportable{
 
     /**
      * Entity ID
-     * @var Int $_id 
+     * @var Int $id 
      */
-    protected $_id = 0;
+    protected $id = 0;
 
     /**
      * Entity Name
-     * @var String $_name 
+     * @var String $name 
      */
-    protected $_name = '';
+    protected $name = '';
 
     /**
      * @param String $name
@@ -44,17 +44,17 @@ abstract class Entity extends Exportable{
     }
 
     /**
-     * @return Int $_id Entity ID
+     * @return Int $id Entity ID
      */
     public function getId() {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
      * @return String $name Entity Name
      */
     public function getName() {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class Entity extends Exportable{
      * @return Entity method chain
      */
     public function setId($id) {
-        $this->_id = $id;
+        $this->id = $id;
         return $this;
     }
 
@@ -85,7 +85,7 @@ abstract class Entity extends Exportable{
      * @return Entity method chain
      */
     public function setName($name) {
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
     }
 
