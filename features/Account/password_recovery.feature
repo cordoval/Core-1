@@ -2,7 +2,7 @@
 Feature: Password recovery
 In order to recover a lost password as registered user I have to input valid informations
 
-Scenario: request a code with valid use
+Scenario: request a code with valid user
      Given user with follwoing informations:
        | id | username | password | email | activation_code |
        | 1 | BlackScorp | 123456 | test@test.de |  |
