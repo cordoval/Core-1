@@ -3,7 +3,7 @@
 namespace OpenTribes\Core\Player\Mock;
 
 use OpenTribes\Core\Player\Repository as PlayerRepositoryInterface;
-use OpenTribes\Core\Player\Factory as PlayerFactory;
+use OpenTribes\Core\Entity\Factory as EntityFactory;
 use OpenTribes\Core\Player;
 
 class Repository implements PlayerRepositoryInterface {
@@ -13,7 +13,7 @@ class Repository implements PlayerRepositoryInterface {
     public function create() {
         return $this->factory->create();
     }
-    public function __construct(PlayerFactory $playerFactory) {
+    public function __construct(EntityFactory $playerFactory) {
         $this->factory = $playerFactory;
     
     }
@@ -38,7 +38,7 @@ class Repository implements PlayerRepositoryInterface {
     }
     public function findByEmail($email) {
         foreach ($this->data as $player) {
-            if ($player['email']== $email) {
+            if ($player['email'] == $email) {
                 return $this->factory->createFromArray($player);
             }
         }
@@ -52,11 +52,12 @@ class Repository implements PlayerRepositoryInterface {
         }
       
     }
-    public function findAll($offset = null, $length = null) {
-        $data = $this->data;
+    public function findAll($offset = 0, $length = null) {
+     
     
         if($length)
-        array_splice($data,$offset,$length);
+        $length = count($this->data);
+        $data = array_slice($this->data,$offset,$length,TRUE);
 
         
         return $data;
