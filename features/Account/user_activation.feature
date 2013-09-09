@@ -1,3 +1,4 @@
+@Account
 Feature: User Activation
 In order to login as registered user, i need to activate my account
 

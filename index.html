@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns ="http://www.w3.org/1999/xhtml">
 <head>
@@ -324,6 +323,9 @@
     <div id="behat">
         
 <div class="feature">
+<ul class="tags">
+<li>@Account</li>
+</ul>
 <h2>
 <span class="keyword">Feature: </span>
 <span class="title">Password recovery</span>
@@ -336,7 +338,7 @@ In Order to recover a lost password as registered User you have to input valid i
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">request a code with valid use</span>
-<span class="path">features/password_recovery.feature:4</span>
+<span class="path">features/Account/password_recovery.feature:5</span>
 </h3>
 <ol>
 <li class="passed">
@@ -425,6 +427,9 @@ In Order to recover a lost password as registered User you have to input valid i
 </div>
 </div>
 <div class="feature">
+<ul class="tags">
+<li>@Account</li>
+</ul>
 <h2>
 <span class="keyword">Feature: </span>
 <span class="title">User Activation</span>
@@ -437,7 +442,7 @@ In order to login as registered user, i need to activate my account<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">Activate valid account</span>
-<span class="path">features/user_activation.feature:4</span>
+<span class="path">features/Account/user_activation.feature:5</span>
 </h3>
 <ol>
 <li class="passed">
@@ -522,7 +527,7 @@ In order to login as registered user, i need to activate my account<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">invalid activation code</span>
-<span class="path">features/user_activation.feature:16</span>
+<span class="path">features/Account/user_activation.feature:17</span>
 </h3>
 <ol>
 <li class="passed">
@@ -600,7 +605,7 @@ In order to login as registered user, i need to activate my account<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">user not exists</span>
-<span class="path">features/user_activation.feature:27</span>
+<span class="path">features/Account/user_activation.feature:28</span>
 </h3>
 <ol>
 <li class="passed">
@@ -678,7 +683,7 @@ In order to login as registered user, i need to activate my account<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">user already active</span>
-<span class="path">features/user_activation.feature:38</span>
+<span class="path">features/Account/user_activation.feature:39</span>
 </h3>
 <ol>
 <li class="passed">
@@ -754,6 +759,9 @@ In order to login as registered user, i need to activate my account<br />
 </div>
 </div>
 <div class="feature">
+<ul class="tags">
+<li>@Account</li>
+</ul>
 <h2>
 <span class="keyword">Feature: </span>
 <span class="title">User login</span>
@@ -766,7 +774,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with valid account</span>
-<span class="path">features/user_login.feature:4</span>
+<span class="path">features/Account/user_login.feature:5</span>
 </h3>
 <ol>
 <li class="passed">
@@ -851,7 +859,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with invalid password</span>
-<span class="path">features/user_login.feature:16</span>
+<span class="path">features/Account/user_login.feature:17</span>
 </h3>
 <ol>
 <li class="passed">
@@ -929,7 +937,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with invalid usename</span>
-<span class="path">features/user_login.feature:27</span>
+<span class="path">features/Account/user_login.feature:28</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1007,7 +1015,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with not active account</span>
-<span class="path">features/user_login.feature:38</span>
+<span class="path">features/Account/user_login.feature:39</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1085,7 +1093,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with empty username</span>
-<span class="path">features/user_login.feature:49</span>
+<span class="path">features/Account/user_login.feature:50</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1163,7 +1171,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with short username</span>
-<span class="path">features/user_login.feature:60</span>
+<span class="path">features/Account/user_login.feature:61</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1241,7 +1249,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with long username</span>
-<span class="path">features/user_login.feature:71</span>
+<span class="path">features/Account/user_login.feature:72</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1319,7 +1327,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with invalid username</span>
-<span class="path">features/user_login.feature:82</span>
+<span class="path">features/Account/user_login.feature:83</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1397,7 +1405,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with empty password</span>
-<span class="path">features/user_login.feature:93</span>
+<span class="path">features/Account/user_login.feature:94</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1475,7 +1483,7 @@ In Order to to login as Registered use, i have to input valid informations<br />
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">login with short password</span>
-<span class="path">features/user_login.feature:104</span>
+<span class="path">features/Account/user_login.feature:105</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1551,6 +1559,9 @@ In Order to to login as Registered use, i have to input valid informations<br />
 </div>
 </div>
 <div class="feature">
+<ul class="tags">
+<li>@Account</li>
+</ul>
 <h2>
 <span class="keyword">Feature: </span>
 <span class="title">User registration</span>
@@ -1563,7 +1574,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">Create new account with valid data</span>
-<span class="path">features/user_registration.feature:4</span>
+<span class="path">features/Account/user_registration.feature:5</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1634,7 +1645,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">username empty</span>
-<span class="path">features/user_registration.feature:14</span>
+<span class="path">features/Account/user_registration.feature:15</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1691,7 +1702,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">username too short</span>
-<span class="path">features/user_registration.feature:22</span>
+<span class="path">features/Account/user_registration.feature:23</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1748,7 +1759,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">username too long</span>
-<span class="path">features/user_registration.feature:30</span>
+<span class="path">features/Account/user_registration.feature:31</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1805,7 +1816,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">username has invalid character</span>
-<span class="path">features/user_registration.feature:38</span>
+<span class="path">features/Account/user_registration.feature:39</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1862,7 +1873,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">username already exists</span>
-<span class="path">features/user_registration.feature:46</span>
+<span class="path">features/Account/user_registration.feature:47</span>
 </h3>
 <ol>
 <li class="passed">
@@ -1946,7 +1957,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">empty email</span>
-<span class="path">features/user_registration.feature:57</span>
+<span class="path">features/Account/user_registration.feature:58</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2003,7 +2014,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">email already exists</span>
-<span class="path">features/user_registration.feature:65</span>
+<span class="path">features/Account/user_registration.feature:66</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2087,7 +2098,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">email is invalid</span>
-<span class="path">features/user_registration.feature:76</span>
+<span class="path">features/Account/user_registration.feature:77</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2144,7 +2155,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">empty password</span>
-<span class="path">features/user_registration.feature:84</span>
+<span class="path">features/Account/user_registration.feature:85</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2201,7 +2212,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">password too short</span>
-<span class="path">features/user_registration.feature:92</span>
+<span class="path">features/Account/user_registration.feature:93</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2258,7 +2269,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">incorrect password confirm</span>
-<span class="path">features/user_registration.feature:100</span>
+<span class="path">features/Account/user_registration.feature:101</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2315,7 +2326,7 @@ In order to create an account as unregistered user, i have to use valid values<b
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">incorrect email confirm</span>
-<span class="path">features/user_registration.feature:108</span>
+<span class="path">features/Account/user_registration.feature:109</span>
 </h3>
 <ol>
 <li class="passed">
@@ -2372,13 +2383,13 @@ In order to create an account as unregistered user, i have to use valid values<b
 <div class="summary passed">
 <div class="counters">
 <p class="scenarios">
-28 Szenarien (<strong class="passed">27 bestanden</strong>, <strong class="pending">1 ausbleibend</strong>)
+28 scenarios (<strong class="passed">27 passed</strong>, <strong class="pending">1 pending</strong>)
 </p>
 <p class="steps">
-135 Schritte (<strong class="passed">131 bestanden</strong>, <strong class="skipped">3 übersprungen</strong>, <strong class="pending">1 ausbleibend</strong>)
+135 steps (<strong class="passed">131 passed</strong>, <strong class="skipped">3 skipped</strong>, <strong class="pending">1 pending</strong>)
 </p>
 <p class="time">
-0m1.082s
+0m0.312s
 </p>
 </div>
 <div class="switchers">

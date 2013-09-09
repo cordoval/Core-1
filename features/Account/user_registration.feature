@@ -1,3 +1,4 @@
+@Account
 Feature: User registration
 In order to create an account as unregistered user, i have to use valid values
 

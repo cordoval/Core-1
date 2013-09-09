@@ -1,3 +1,4 @@
+@Account
 Feature: Password recovery
 In Order to recover a lost password as registered User you have to input valid informations
 

@@ -1,3 +1,4 @@
+@Account
 Feature: User login
 In Order to to login as Registered use, i have to input valid informations
 
