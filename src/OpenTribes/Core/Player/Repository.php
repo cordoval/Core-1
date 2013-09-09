@@ -3,9 +3,9 @@
 namespace OpenTribes\Core\Player;
 
 use OpenTribes\Core\Player;
-use OpenTribes\Core\Player\Factory as PlayerFactory;
+use OpenTribes\Core\Entity\Factory as Factory;
 interface Repository {
-    public function __construct(PlayerFactory $playerFactory);
+    public function __construct(Factory $playerFactory);
 
     public function findByName($name);
     public function findByUsername($username);

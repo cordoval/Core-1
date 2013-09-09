@@ -2,13 +2,15 @@
 
 namespace OpenTribes\Core\Entity;
 
-use OpenTribes\Core\Factory as BaseFactory;
-
-abstract class Factory implements BaseFactory {
+use OpenTribes\Core\Factory as FactoryInterface;
+use OpenTribes\Core\Entity;
+class Factory implements FactoryInterface {
 
     protected $object = NULL;
 
-    abstract public function __construct();
+    public function __construct(Entity $entity){
+        $this->object = $entity;
+    }
 
     /**
      * {@inheritdoc}
@@ -36,7 +38,7 @@ abstract class Factory implements BaseFactory {
      * {@inheritdoc}
      */
     public function createFromSerializedString($string) {
-        return unserialize($string);
+        return $this->createFromArray(unserialize($string));
     }
 
     /**

@@ -8,12 +8,12 @@
 * @license    For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
 */
 namespace OpenTribes\Core;
+
 /**
  * Factory Interface creates new Entities
  */
 interface Factory {
 
-    public function __construct();
     /**
      * Create an Object of given class from JSON String
      * @param String $json

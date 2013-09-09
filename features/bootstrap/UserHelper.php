@@ -19,7 +19,7 @@ use OpenTribes\Core\Player\ActivationMail\Send\Request as SendActivationMailRequ
 use OpenTribes\Core\Player\ActivationMail\Send\Interactor as SendActivationMailInteractor;
 use OpenTribes\Core\Player\Activate\Request as PlayerActivateRequest;
 use OpenTribes\Core\Player\Activate\Interactor as PlayerActivateInteractor;
-use OpenTribes\Core\Player\Factory as PlayerFactory;
+use OpenTribes\Core\Entity\Factory as EntityFactory;
 require_once 'vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
 
 class UserHelper {
@@ -34,12 +34,14 @@ class UserHelper {
 
     public function __construct() {
         $this->roleRepository = new RoleRepository();
-        $this->playerRepository = new PlayerRepository(new PlayerFactory);
+        $this->playerRepository = new PlayerRepository(new EntityFactory(new Player()));
         $this->playerRolesRepository = new PlayerRolesRepository();
+        
         $this->hasher = new MockHasher();
         $this->codeGenerator = new MockCodeGenerator();
         $this->mailer = new MockMailer();
         $this->initRoles();
+     
     }
   
      // Default Methods to initialize Data
@@ -104,6 +106,7 @@ class UserHelper {
             $player->setRoles($roles);
             $this->playerRepository->save($player);
         }
+        
     }
     //Interactor tests
     /**
