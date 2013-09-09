@@ -13,8 +13,6 @@ use Behat\Gherkin\Node\PyStringNode,
 
 require_once 'vendor/autoload.php';
 
-
-
 /**
  * Features context.
  */
@@ -46,63 +44,63 @@ class FeatureContext extends BehatContext {
 //    }
 //
     /**
-     * @Given /^iam not registered user$/
+     * @Given /^I\'m not registered user$/
      */
     public function iamNotRegisteredUser() {
         $this->userHelper->newUser();
     }
 
     /**
-     * @Given /^i have "([^"]*)" roles$/
+     * @Given /^I have "([^"]*)" roles$/
      */
     public function iHaveRoles($arg1) {
         $this->userHelper->addRole($arg1);
     }
 
     /**
-     * @When /^i register with following informations:$/
+     * @When /^I register with following informations:$/
      */
     public function iRegisterWithFollowingInformations(TableNode $table) {
         $this->userHelper->create($table->getHash());
     }
 
     /**
-     * @Then /^i should be registered$/
+     * @Then /^I should be registered$/
      */
     public function iShouldBeRegistered() {
         $this->userHelper->assertIsCreateResponse();
     }
 
     /**
-     * @When /^i login with following informations:$/
+     * @When /^I login with following informations:$/
      */
     public function iLoginWithFollowingInformations(TableNode $table) {
         $this->userHelper->login($table->getHash());
     }
 
     /**
-     * @Then /^i should be logged in$/
+     * @Then /^I should be logged in$/
      */
     public function iShouldBeLoggedIn() {
         $this->userHelper->assertIsLoginResponse();
     }
 
     /**
-     * @Given /^i should get an activation code$/
+     * @Given /^I should get an activation code$/
      */
     public function iShouldGetAnActivationCode() {
         $this->userHelper->assertHasActivationCode();
     }
 
     /**
-     * @Given /^i should get an email with activation code$/
+     * @Given /^I should get an email with activation code$/
      */
     public function iShouldGetAnEmailWithActivationCode() {
         $this->userHelper->sendActivationCode();
     }
 
     /**
-     * @Then /^i should see an "([^"]*)" Exception$/
+     * @Then /^I should see an "([^"]*)" exception$/
      */
     public function iShouldSeeAnException($arg1) {
         $this->userHelper->assertException($arg1);
@@ -115,67 +113,59 @@ class FeatureContext extends BehatContext {
         $this->userHelper->createDumpUser($table->getHash());
     }
 
- 
-
     /**
-     * @When /^i activate account with following informations:$/
+     * @When /^I activate account with following informations:$/
      */
     public function iActivateAccountWithFollowingInformations(TableNode $table) {
         $this->userHelper->activateAccount($table->getHash());
     }
 
     /**
-     * @Then /^i should be activated$/
+     * @Then /^I should be activated$/
      */
     public function iShouldBeActivated() {
         $this->userHelper->assertActivated();
- 
     }
 
     /**
-     * @Given /^iam not logged in$/
+     * @Given /^I\'m not logged in$/
      */
     public function iamNotLoggedIn() {
-       $this->userHelper->newUser();
+        $this->userHelper->newUser();
     }
-  
-       /**
-     * @Given /^i should have "([^"]*)" roles$/
+
+    /**
+     * @Given /^I should have "([^"]*)" roles$/
      */
-    public function iShouldHaveRoles($arg1)
-    {
+    public function iShouldHaveRoles($arg1) {
         $this->userHelper->assertHasRole($arg1);
     }
 
-        /**
-     * @When /^i request the code with following informations$/
+    /**
+     * @When /^I request the code with following informations$/
      */
-    public function iRequestTheCodeWithFollowingInformations(TableNode $table)
-    {
+    public function iRequestTheCodeWithFollowingInformations(TableNode $table) {
         throw new PendingException();
     }
 
     /**
      * @Then /^a recovery mail should be created$/
      */
-    public function aRecoveryMailShouldBeCreated()
-    {
+    public function aRecoveryMailShouldBeCreated() {
         throw new PendingException();
     }
 
     /**
      * @Given /^the mail should be send$/
      */
-    public function theMailShouldBeSend()
-    {
+    public function theMailShouldBeSend() {
         throw new PendingException();
     }
 
     /**
-     * @Given /^i should have a recovery code$/
+     * @Given /^I should have a recovery code$/
      */
-    public function iShouldHaveARecoveryCode()
-    {
+    public function iShouldHaveARecoveryCode() {
         throw new PendingException();
     }
 
