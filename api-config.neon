@@ -11,12 +11,11 @@ skipDocPath:
 # Don't generate documentation for classes with this name prefix
 skipDocPrefix:
 # Character set of source files
-charset: auto
+charset: UTF-8
 # Main project name prefix
-main:
-
+main: Open Tribes
 # Title of generated documentation
-title: Open Tribes
+title: Core Module
 # Documentation base URL
 baseUrl:
 # Google Custom Search ID
