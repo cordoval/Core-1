@@ -1,0 +1,8 @@
+# behat.yml
+default:
+  formatters:
+    html:
+      language:     en
+      output_path:  index.html
+    progress:
+      language:     en
