@@ -11,12 +11,9 @@
     ],
     "name": "opentribes/core",
     "require": {
-        "php": ">=5.3"
-       
     },
     "require-dev": {
-        "behat/behat": "2.5.*@dev",
-        "phpunit/phpunit": "~3.7.19"
+        "behat/behat": "3.0.*@dev"
     },
     "config": {
         "bin-dir": "bin/"
