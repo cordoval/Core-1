@@ -11,9 +11,14 @@
     ],
     "name": "opentribes/core",
     "require": {
+        "php": ">=5.3",
+        "silex/silex": "1.1.*@dev",
+        "mustache/silex-provider": "dev-master",
+        "igorw/config-service-provider": "1.2.*@dev"
     },
     "require-dev": {
-        "behat/behat": "3.0.*@dev"
+        "behat/behat": "3.0.*@dev",
+       "phpunit/phpunit": "3.7.*@dev"
     },
     "config": {
         "bin-dir": "bin/"
