@@ -3,13 +3,13 @@
 namespace OpenTribes\Core\Player\Activate;
 use OpenTribes\Core\Player;
 class Response{
-    protected $_player;
+    protected $player;
     public function setPlayer(Player $player){
-        $this->_player = $player;
+        $this->player = $player;
         return $this;
     }
     public function getPlayer(){
-        return $this->_player;
+        return $this->player;
     }
     public function __construct($player = null) {
         $this->setPlayer($player);

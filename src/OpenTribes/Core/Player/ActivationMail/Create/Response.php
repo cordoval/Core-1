@@ -6,7 +6,7 @@ use OpenTribes\Core\Player\ActivationMail\View\Mail;
 
 class Response {
 
-    protected $_mailView;
+    protected $mailView;
 
 
     public function __construct(Mail $mailView) {
@@ -14,12 +14,12 @@ class Response {
     }
 
     public function setMailView(Mail $mailView) {
-        $this->_mailView = $mailView;
+        $this->mailView = $mailView;
         return $this;
     }
 
     public function getMailView() {
-        return $this->_mailView;
+        return $this->mailView;
     }
 
 }

@@ -5,15 +5,15 @@ namespace OpenTribes\Core\Player\ActivationMail\View;
 use OpenTribes\Core\Player;
 class Mail{
 
-    protected $_player;
+    protected $player;
     public function __construct(Player $player) {
         $this->setPlayer($player);
     }
     public function getPlayer(){
-        return $this->_player;
+        return $this->player;
     }
     public function setPlayer(Player $player){
-        $this->_player = $player;
+        $this->player = $player;
         return $this;
     }
 }

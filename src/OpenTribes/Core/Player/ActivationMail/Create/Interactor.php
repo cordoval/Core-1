@@ -7,18 +7,18 @@ use OpenTribes\Core\Util\CodeGenerator;
 use OpenTribes\Core\Player\ActivationMail\View\Mail;
 
 class Interactor{
-    protected $_playerRepository;
-    protected $_codeGenerator;
+    protected $playerRepository;
+    protected $codeGenerator;
     
     public function __construct(PlayerRepository $playerRepository,  CodeGenerator $codeGenerator){
-        $this->_playerRepository = $playerRepository;
-        $this->_codeGenerator = $codeGenerator;
+        $this->playerRepository = $playerRepository;
+        $this->codeGenerator = $codeGenerator;
     }
     public function __invoke(Request $request) {
-        $code = $this->_codeGenerator->create();
+        $code = $this->codeGenerator->create();
         $player = $request->getPlayer();
         $player->setActivationCode($code);
-        $this->_playerRepository->save($player);
+        $this->playerRepository->save($player);
         
         
         return new Response(new Mail($player));

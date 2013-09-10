@@ -4,8 +4,8 @@ namespace OpenTribes\Core\Player\Login;
 
 class Request {
 
-    protected $_username;
-    protected $_password;
+    protected $username;
+    protected $password;
     
 
     public function __construct($username = null, $password = null) {
@@ -14,23 +14,23 @@ class Request {
     }
 
     public function setPassword($password) {
-        $this->_password = $password;
+        $this->password = $password;
         return $this;
     }
 
     public function setUsername($username) {
-        $this->_username = $username;
+        $this->username = $username;
         return $this;
     }
 
 
 
     public function getPassword() {
-        return $this->_password;
+        return $this->password;
     }
 
     public function getUsername() {
-        return $this->_username;
+        return $this->username;
     }
 
   

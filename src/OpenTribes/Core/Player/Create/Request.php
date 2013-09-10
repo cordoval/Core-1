@@ -4,11 +4,11 @@ namespace OpenTribes\Core\Player\Create;
 
 class Request {
 
-    protected $_username;
-    protected $_passwordConfirm;
-    protected $_password;
-    protected $_email;
-    protected $_emailConfirm;
+    protected $username;
+    protected $passwordConfirm;
+    protected $password;
+    protected $email;
+    protected $emailConfirm;
 
     public function __construct($username = null, $password = null, $email = null,$passwordConfirm = null,$emailConfirm=null) {
         $this->setUsername($username)
@@ -18,44 +18,44 @@ class Request {
                 ->setPasswordConfirm($passwordConfirm);
     }
     public function setPasswordConfirm($passwordConfirm){
-        $this->_passwordConfirm = $passwordConfirm;
+        $this->passwordConfirm = $passwordConfirm;
         return $this;
     }
     public function setEmailConfirm($emailConfirm){
-        $this->_emailConfirm = $emailConfirm;
+        $this->emailConfirm = $emailConfirm;
         return $this;
     }
 
     public function setPassword($password) {
-        $this->_password = $password;
+        $this->password = $password;
         return $this;
     }
 
     public function setUsername($username) {
-        $this->_username = $username;
+        $this->username = $username;
         return $this;
     }
 
     public function setEmail($email) {
-        $this->_email = $email;
+        $this->email = $email;
         return $this;
     }
 
     public function getPassword() {
-        return $this->_password;
+        return $this->password;
     }
 
     public function getUsername() {
-        return $this->_username;
+        return $this->username;
     }
 
     public function getEmail() {
-        return $this->_email;
+        return $this->email;
     }
     public function getPasswordConfirm(){
-        return $this->_passwordConfirm;
+        return $this->passwordConfirm;
     }
     public function getEmailConfirm(){
-        return $this->_emailConfirm;
+        return $this->emailConfirm;
     }
 }

@@ -3,10 +3,10 @@
 namespace OpenTribes\Core\Player\ActivationMail\Send;
 
 class Request{
-    protected $_mailBody;
-    protected $_email;
-    protected $_name;
-    protected $_subject;
+    protected $mailBody;
+    protected $email;
+    protected $name;
+    protected $subject;
     
     public function __construct($mailBody = null,$email = null,$name = null,$subject = null) {
         $this->setMailBody($mailBody)
@@ -15,32 +15,32 @@ class Request{
                 ->setSubject($subject);
     }
     public function setMailBody($mailBody){
-        $this->_mailBody = $mailBody;
+        $this->mailBody = $mailBody;
         return $this;
     }
     public function setEmail($email){
-        $this->_email = $email;
+        $this->email = $email;
         return $this;
     }
     public function setName($name){
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
     }
     public function setSubject($subject){
-        $this->_subject = $subject;
+        $this->subject = $subject;
         return $this;
     }
 
     public function getMailBody(){
-        return $this->_mailBody;
+        return $this->mailBody;
     }
     public function getEmail(){
-        return $this->_email;
+        return $this->email;
     }
     public function getName(){
-        return $this->_name;
+        return $this->name;
     }
     public function getSubject(){
-        return $this->_subject;
+        return $this->subject;
     }
 }

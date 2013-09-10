@@ -12,16 +12,16 @@ use OpenTribes\Core\Player\Activate\Exception\Active as AlreadyActiveException;
 
 class Interactor {
 
-    protected $_playerRepository;
-    protected $_playerRoleRepository;
+    protected $playerRepository;
+    protected $playerRoleRepository;
 
     public function __construct(PlayerRepository $playerRepository, PlayerRolesRepository $playerRolesRepository) {
-        $this->_playerRepository = $playerRepository;
-        $this->_playerRoleRepository = $playerRolesRepository;
+        $this->playerRepository = $playerRepository;
+        $this->playerRoleRepository = $playerRolesRepository;
     }
 
     public function __invoke(Request $request) {
-        $player = $this->_playerRepository->findByUsername($request->getUsername());
+        $player = $this->playerRepository->findByUsername($request->getUsername());
         if (!$player)
             throw new NotExistsException;
         if (!((bool)$player->getActivationCode()))
@@ -33,7 +33,7 @@ class Interactor {
         $roles = new PlayerRoles();
         $roles->addRole($request->getRole());
         $player->setRoles($roles);
-        $this->_playerRepository->save($player);
+        $this->playerRepository->save($player);
         return new Response($player);
     }
 

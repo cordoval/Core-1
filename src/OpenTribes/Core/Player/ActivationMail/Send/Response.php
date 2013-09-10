@@ -3,16 +3,16 @@
 namespace OpenTribes\Core\Player\ActivationMail\Send;
 
 class Response{
-    protected $_result;
+    protected $result;
     public function __construct($result = null) {
         $this->setResult($result);
     }
     public function setResult($result){
-        $this->_result = $result;
+        $this->result = $result;
         return $this;
     }
     public function getResult(){
-        return $this->_result;
+        return $this->result;
     }
             
 }
