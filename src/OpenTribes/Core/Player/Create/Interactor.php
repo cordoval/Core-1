@@ -13,27 +13,27 @@ use OpenTribes\Core\Player\Create\Exception\Password\Confirm as PasswordConfirmE
 
 class Interactor {
 
-    private $_playerRepository = null;
-    private $_rolesRepository = null;
-    private $_hasher = null;
+    private $playerRepository = null;
+    private $rolesRepository = null;
+    private $hasher = null;
 
     public function __construct(PlayerRepository $playerRepo, RolesRepository $rolesRepo, Hasher $hasher) {
-        $this->_playerRepository = $playerRepo;
-        $this->_rolesRepository = $rolesRepo;
-        $this->_hasher = $hasher;
+        $this->playerRepository = $playerRepo;
+        $this->rolesRepository = $rolesRepo;
+        $this->hasher = $hasher;
     }
 
     public function __invoke(Request $request) {
 
-        $password_hashed = $this->_hasher->hash($request->getPassword());
-        $player = new Player();
+        $password_hashed = $this->hasher->hash($request->getPassword());
+        $player = $this->playerRepository->create();
         $player->setPassword($request->getPassword());
         $player->setUsername($request->getUsername());
         $player->setEmail($request->getEmail());
 
-        if ($this->_playerRepository->findByUsername($request->getUsername()))
+        if ($this->playerRepository->findByUsername($request->getUsername()))
             throw new UsernameExistsException;
-        if ($this->_playerRepository->findByEmail($request->getEmail()))
+        if ($this->playerRepository->findByEmail($request->getEmail()))
             throw new EmailExistsException;
 
         if ($request->getEmail() !== $request->getEmailConfirm())
@@ -43,8 +43,8 @@ class Interactor {
 
         $player->setPassword($password_hashed);
 
-        $this->_playerRepository->save($player);
-
+        $this->playerRepository->save($player);
+        
         return new Response($player);
     }
 
