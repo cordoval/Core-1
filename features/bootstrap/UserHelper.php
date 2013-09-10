@@ -93,14 +93,11 @@ class UserHelper {
      * @param array $data Userdata
      */
     public function createDumpUser(array $data) {
-
+        $factory = new EntityFactory(new Player());
         foreach ($data as $row) {
-            $player = new Player();
-            $player->setUsername($row['username']);
-            $player->setId($row['id']);
-            $player->setPassword($this->hasher->hash($row['password']));
-            $player->setEmail($row['email']);
-            $player->setActivationCode($row['activation_code']);
+            $player = $factory->createFromArray($row);
+            //hash password
+            $player->setPassword($this->hasher->hash($player->getPassword()));
             $roles = new PlayerRoles();
             $roles->addRole($this->roleRepository->findByName('Player'));
             $player->setRoles($roles);
