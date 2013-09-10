@@ -4,8 +4,8 @@ In order to to login as registered user, I have to input valid informations
 
 Scenario: login with valid account
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -16,8 +16,8 @@ Scenario: login with valid account
 
 Scenario: login with invalid password
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -27,8 +27,8 @@ Scenario: login with invalid password
 
 Scenario: login with invalid usename
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -38,7 +38,7 @@ Scenario: login with invalid usename
 
 Scenario: login with not active account
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
+       | id | username | password | email | activationCode |
        | 1 | BlackScorp | 123456 | test@test.de | qwerty |
     And I'm not logged in
     And I have "Guest" roles
@@ -49,8 +49,8 @@ Scenario: login with not active account
 
 Scenario: login with empty username
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email | 
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -60,8 +60,8 @@ Scenario: login with empty username
 
 Scenario: login with short username
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -71,8 +71,8 @@ Scenario: login with short username
 
 Scenario: login with long username
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -82,8 +82,8 @@ Scenario: login with long username
 
 Scenario: login with invalid username
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -93,8 +93,8 @@ Scenario: login with invalid username
 
 Scenario: login with empty password
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:
@@ -104,8 +104,8 @@ Scenario: login with empty password
 
 Scenario: login with short password
      Given user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de |  |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     And I'm not logged in
     And I have "Guest" roles
     When I login with following informations:

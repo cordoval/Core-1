@@ -48,8 +48,8 @@ Scenario: username already exists
     Given I'm not registered user
     And I have "Guest" roles
     And user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de | |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp | 123456  | 123456 | test@test.de | test@test.de |
@@ -67,8 +67,8 @@ Scenario: email already exists
     Given I'm not registered user
     And I have "Guest" roles
     And user with follwoing informations:
-       | id | username | password | email | activation_code |
-       | 1 | BlackScorp | 123456 | test@test.de | |
+       | id | username | password | email |
+       | 1 | BlackScorp | 123456 | test@test.de |
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | Black | 123456  | 123456 | test@test.de | test@test.de |
