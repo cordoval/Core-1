@@ -6,11 +6,12 @@
      
     Background:
         Given a map with following tiles:
-            | Grass | Grass | Grass | Grass | Grass |
-            | Grass | Forrest | Grass | Grass | Grass |
-            | Grass | Grass | Grass | Grass | Grass |
-            | Grass | Sea | Grass | Hill | Grass |
-            | Grass | Grass | Grass | Grass | Grass |
+         |   y/x   |   0   |   1   |   2   |   3   |   4   |
+         |  0   | Grass | Grass | Grass | Grass | Grass |
+         |  1   | Grass | Forrest | Grass | Grass | Grass |
+         |  2   | Grass | Grass | Grass | Grass | Grass |
+         |  3   | Grass | Sea | Grass | Hill | Grass |
+         |  4   | Grass | Grass | Grass | Grass | Grass |
         And following cities:
             | id | name | owner | x | y |
             | 1 | City1 | Owner1 | 0 | 0 |
