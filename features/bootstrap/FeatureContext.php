@@ -1,24 +1,16 @@
 <?php
 
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
-
-//
-// Require 3rd-party libraries here:
-//
-
-require_once 'vendor/autoload.php';
+use Behat\Behat\Context\ContextInterface;
+use Behat\Behat\Exception\PendingException;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 
 /**
- * Features context.
+ * Behat context class.
  */
-class FeatureContext extends BehatContext {
-
-    protected $userHelper;
+class FeatureContext implements ContextInterface
+{
+   protected $userHelper;
 
     /**
      * Initializes context.
@@ -166,6 +158,45 @@ class FeatureContext extends BehatContext {
      * @Given /^I should have a recovery code$/
      */
     public function iShouldHaveARecoveryCode() {
+        throw new PendingException();
+    }
+        /**
+     * @Given /^a map with following tiles:$/
+     */
+    public function aMapWithFollowingTiles(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^following cities:$/
+     */
+    public function followingCities(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^I\'m logged in as user "([^"]*)"$/
+     */
+    public function iMLoggedInAsUser($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^I create a city at location x=(\d+) and y=(\d+)$/
+     */
+    public function iCreateACityAtLocationXAndY($arg1, $arg2)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^I should have a city$/
+     */
+    public function iShouldHaveACity()
+    {
         throw new PendingException();
     }
 

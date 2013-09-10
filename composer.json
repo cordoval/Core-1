@@ -18,10 +18,11 @@
     },
     "require-dev": {
         "behat/behat": "3.0.*@dev",
-       "phpunit/phpunit": "3.7.*@dev"
+        "phpunit/phpunit": "3.7.*@dev"
     },
     "config": {
-        "bin-dir": "bin/"
+        "bin-dir": "bin/",
+        "process-timeout": "600"
     },
     "autoload": {
         "psr-0": {"OpenTribes\\Core": ["src/", "mock/"]}
