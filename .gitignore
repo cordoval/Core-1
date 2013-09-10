@@ -56,4 +56,3 @@ vendor
 #composer binary
 bin
 composer.lock
-index.html
