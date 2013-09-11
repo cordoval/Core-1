@@ -2,8 +2,9 @@
 
 namespace OpenTribes\Core\Player\Activate;
 
+use OpenTribes\Core\Request as BaseRequest;
 use OpenTribes\Core\Role;
-class Request{
+class Request extends BaseRequest{
     protected $username;
     protected $code;
     protected $role;

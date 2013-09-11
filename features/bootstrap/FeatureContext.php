@@ -11,7 +11,7 @@ use Behat\Gherkin\Node\TableNode;
 class FeatureContext implements ContextInterface
 {
    protected $userHelper;
-
+   protected $cityHelper;
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -22,6 +22,7 @@ class FeatureContext implements ContextInterface
         // Initialize your context here
         $this->parameters = $parameters;
         $this->userHelper = new UserHelper();
+        $this->cityHelper = new CityHelper();
     }
 
 //
@@ -160,12 +161,21 @@ class FeatureContext implements ContextInterface
     public function iShouldHaveARecoveryCode() {
         throw new PendingException();
     }
-        /**
-     * @Given /^a map with following tiles:$/
+   
+   /**
+     * @Given /^following tiles:$/
      */
-    public function aMapWithFollowingTiles(TableNode $table)
+    public function followingTiles(TableNode $table)
     {
-        throw new PendingException();
+         $this->cityHelper->createTiles($table->getHash());
+    }
+
+    /**
+     * @Given /^a map "([^"]*)" with following tiles:$/
+     */
+    public function aMapWithFollowingTiles2($arg1, TableNode $table)
+    {
+        $this->cityHelper->createMapWithTiles($arg1,$table->getRowsHash());
     }
 
     /**

@@ -2,7 +2,8 @@
 
 namespace OpenTribes\Core\Player\Activate;
 use OpenTribes\Core\Player;
-class Response{
+use OpenTribes\Core\Response as BaseResponse;
+class Response extends BaseResponse{
     protected $player;
     public function setPlayer(Player $player){
         $this->player = $player;
