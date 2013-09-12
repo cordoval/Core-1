@@ -1,4 +1,4 @@
-@Account
+@Account @Create
 Feature: User registration
 In order to create an account as unregistered user, I have to input valid values
 

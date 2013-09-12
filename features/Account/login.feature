@@ -1,4 +1,4 @@
-@Account
+@Account @Login
 Feature: User login
 In order to to login as registered user, I have to input valid informations
 
