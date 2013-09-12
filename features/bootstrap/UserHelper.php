@@ -31,10 +31,10 @@ class UserHelper {
     protected $codeGenerator;
     protected $exception = null;
     protected $mailer = null;
-
+    protected $playerRolesRepository;
     public function __construct() {
         $this->roleRepository = new RoleRepository();
-        $this->playerRepository = new PlayerRepository(new EntityFactory(new Player()));
+        $this->playerRepository = new PlayerRepository();
         $this->playerRolesRepository = new PlayerRolesRepository();
         
         $this->hasher = new MockHasher();
@@ -55,20 +55,18 @@ class UserHelper {
         $roleId++;
         $guest->setId($roleId);
         $guest->setName('Guest');
-
+        $this->roleRepository->add($guest);
         $player = new Role();
         $roleId++;
         $player->setId($roleId);
         $player->setName('Player');
-
+        $this->roleRepository->add($player);
         $admin = new Role();
         $roleId++;
         $admin->setId($roleId);
         $admin->setName('Admin');
+        $this->roleRepository->add($admin);
 
-        $this->roleRepository->save($guest);
-        $this->roleRepository->save($player);
-        $this->roleRepository->save($admin);
     }
     /**
      * Method to create empty user 
@@ -97,25 +95,25 @@ class UserHelper {
         foreach ($data as $row) {
             $player = $factory->createFromArray($row);
             //hash password
-            $player->setPassword($this->hasher->hash($player->getPassword()));
+            $player->setPasswordHash($this->hasher->hash($player->getPassword()));
             $roles = new PlayerRoles();
             $roles->addRole($this->roleRepository->findByName('Player'));
             $player->setRoles($roles);
-            $this->playerRepository->save($player);
+            $this->playerRepository->add($player);
         }
         
     }
     //Interactor tests
     /**
-     * Method to create a use with an interactor
+     * Method to create a user with an interactor
      * @param array $data Userdata
      */
     public function create(array $data) {
         foreach ($data as $row) {
-            $request = new PlayerCreateRequest($row['username'], $row['password'], $row['email'], $row['password_confirm'], $row['email_confirm']);
+            $request = new PlayerCreateRequest($row['username'], $row['password'], $row['email'], $row['password_confirm'], $row['email_confirm'],'Guest');
         }
 
-        $interactor = new PlayerCreateInteractor($this->playerRepository, $this->playerRolesRepository, $this->hasher, $this->codeGenerator);
+        $interactor = new PlayerCreateInteractor($this->playerRepository, $this->roleRepository, $this->playerRolesRepository,$this->hasher);
         try {
             $this->response = $interactor($request);
         } catch (\Exception $e) {
@@ -137,6 +135,7 @@ class UserHelper {
         try {
             $this->response = $interactor($request);
         } catch (\Exception $e) {
+       
             $this->exception = $e;
         }
     }
@@ -157,17 +156,17 @@ class UserHelper {
      * @param array $data Userdata
      */
     public function activateAccount(array $data) {
-        $role = $this->roleRepository->findByName('Player');
         foreach ($data as $row) {
-            $request = new PlayerActivateRequest($row['username'], $row['activation_code'], $role);
+            $request = new PlayerActivateRequest($row['username'], $row['activation_code'], 'Player');
         }
-
-        $interactor = new PlayerActivateInteractor($this->playerRepository, $this->playerRolesRepository);
+        $interactor = new PlayerActivateInteractor($this->playerRepository, $this->roleRepository, $this->playerRolesRepository);
         try {
             $this->response = $interactor($request);
         } catch (\Exception $e) {
+         
             $this->exception = $e;
         }
+        
     }
     //Assertion Methods for testing
     /**

@@ -3,18 +3,18 @@
 namespace OpenTribes\Core\Player\Activate;
 
 use OpenTribes\Core\Request as BaseRequest;
-use OpenTribes\Core\Role;
+
 class Request extends BaseRequest{
     protected $username;
     protected $code;
-    protected $role;
-    public function __construct($username = null,$code = null,$role = null) {
+    protected $rolename;
+    public function __construct($username = null,$code = null,$rolename = null) {
        $this->setUsername($username)
                ->setCode($code)
-               ->setRole($role);
+               ->setRolename($rolename);
     }
-    public function setRole(Role $role){
-        $this->role = $role;
+    public function setRolename($role){
+        $this->rolename = $role;
         return $this;
     }
 
@@ -32,8 +32,8 @@ class Request extends BaseRequest{
     public function getUsername(){
         return $this->username;
     }
-    public function getRole(){
-        return $this->role;
+    public function getRolename(){
+        return $this->rolename;
     }
             
 }

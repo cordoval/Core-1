@@ -20,7 +20,7 @@ class CityHelper {
         foreach($tiles as $tile){
             $this->tileRepository->save($factory->createFromArray($tile));
         }
-        print_r($this->tileRepository);
+     //   print_r($this->tileRepository);
     }
 
     public function createMapWithTiles($mapname,array $tiles) {

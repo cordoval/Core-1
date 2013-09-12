@@ -18,7 +18,7 @@ class Interactor{
         $code = $this->codeGenerator->create();
         $player = $request->getPlayer();
         $player->setActivationCode($code);
-        $this->playerRepository->save($player);
+        $this->playerRepository->add($player);
         
         
         return new Response(new Mail($player));

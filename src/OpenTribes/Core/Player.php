@@ -17,6 +17,7 @@ class Player extends Entity {
     protected $roles;
     protected $username;
     protected $password;
+    protected $passwordHash;
     protected $email;
     protected $lastAction;
     protected $activationCode;
@@ -38,6 +39,10 @@ class Player extends Entity {
             throw new PasswordTooShortException;
 
         $this->password = $password;
+        return $this;
+    }
+    public function setPasswordHash($hash){
+        $this->passwordHash = $hash;
         return $this;
     }
 
@@ -66,7 +71,6 @@ class Player extends Entity {
 
     public function setRoles(Roles $roles) {
         $roles->setPlayer($this);
-
         $this->roles = $roles;
         return $this;
     }
@@ -90,6 +94,8 @@ class Player extends Entity {
     public function getActivationCode() {
         return $this->activationCode;
     }
-
+    public function getPasswordHash(){
+        return $this->passwordHash;
+    }
 }
 

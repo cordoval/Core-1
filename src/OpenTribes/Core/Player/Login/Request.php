@@ -6,7 +6,7 @@ class Request {
 
     protected $username;
     protected $password;
-    
+   
 
     public function __construct($username = null, $password = null) {
         $this->setUsername($username)

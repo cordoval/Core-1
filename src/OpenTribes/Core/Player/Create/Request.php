@@ -9,14 +9,20 @@ class Request {
     protected $password;
     protected $email;
     protected $emailConfirm;
-
-    public function __construct($username = null, $password = null, $email = null,$passwordConfirm = null,$emailConfirm=null) {
+    protected $rolename;
+    public function __construct($username = null, $password = null, $email = null,$passwordConfirm = null,$emailConfirm=null,$rolename=null) {
         $this->setUsername($username)
                 ->setEmail($email)
                 ->setPassword($password)
                 ->setEmailConfirm($emailConfirm)
-                ->setPasswordConfirm($passwordConfirm);
+                ->setPasswordConfirm($passwordConfirm)
+                ->setRoleName($rolename);
     }
+    public function setRoleName($rolename){
+        $this->rolename = $rolename;
+        return $this;
+    }
+
     public function setPasswordConfirm($passwordConfirm){
         $this->passwordConfirm = $passwordConfirm;
         return $this;
@@ -57,5 +63,8 @@ class Request {
     }
     public function getEmailConfirm(){
         return $this->emailConfirm;
+    }
+    public function getRoleName(){
+        return $this->rolename;
     }
 }

@@ -56,7 +56,7 @@ Scenario: login with empty username
     When I login with following informations:
         | username | password |
         |  | 123456  |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Emptyexception" exception
+    Then I should see an "OpenTribes\Core\Player\Login\Exception\NotExists" exception
 
 Scenario: login with short username
      Given user with follwoing informations:
@@ -67,7 +67,7 @@ Scenario: login with short username
     When I login with following informations:
         | username | password |
         | B | 123456  |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Short" exception
+    Then I should see an "OpenTribes\Core\Player\Login\Exception\NotExists" exception
 
 Scenario: login with long username
      Given user with follwoing informations:
@@ -78,7 +78,7 @@ Scenario: login with long username
     When I login with following informations:
         | username | password |
         | BlackScorpBlackScorpBlackScorpBlackScorpBlackScorpBlackScorp | 123456  |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Long" exception
+    Then I should see an "OpenTribes\Core\Player\Login\Exception\NotExists" exception
 
 Scenario: login with invalid username
      Given user with follwoing informations:
@@ -89,7 +89,7 @@ Scenario: login with invalid username
     When I login with following informations:
         | username | password |
         | B!@ckS@rp | 123456  |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Invalid" exception
+    Then I should see an "OpenTribes\Core\Player\Login\Exception\NotExists" exception
 
 Scenario: login with empty password
      Given user with follwoing informations:
@@ -100,7 +100,7 @@ Scenario: login with empty password
     When I login with following informations:
         | username | password |
         | BlackScorp |   |
-    Then I should see an "OpenTribes\Core\Player\exception\Password\Emptyexception" exception
+    Then I should see an "OpenTribes\Core\Player\Login\Exception\Invalid" exception
 
 Scenario: login with short password
      Given user with follwoing informations:
@@ -111,4 +111,4 @@ Scenario: login with short password
     When I login with following informations:
         | username | password |
         | BlackScorp | 123 |
-    Then I should see an "OpenTribes\Core\Player\exception\Password\Short" exception
+    Then I should see an "OpenTribes\Core\Player\Login\Exception\Invalid" exception
