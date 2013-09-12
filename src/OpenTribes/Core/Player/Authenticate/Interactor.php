@@ -2,10 +2,11 @@
 
 namespace OpenTribes\Core\Player\Authenticate;
 
-use OpenTribes\Role\Repository as RoleRepository;
-use OpenTribes\Player\Repository as PlayerRepository;
-use OpenTribes\Player\Roles\Repository as PlayerRolesRepository;
-use OpenTribes\Player\Roles as PlayerRoles;
+use OpenTribes\Core\Role\Repository as RoleRepository;
+use OpenTribes\Core\Player\Repository as PlayerRepository;
+use OpenTribes\Core\Player\Roles\Repository as PlayerRolesRepository;
+use OpenTribes\Core\Player\Roles as PlayerRoles;
+use OpenTribes\Core\Player\Authenticate\Exception\Role\NotFound as RoleNotFoundException;
 class Interactor{
     protected $roleRepository;
     protected $playerRoleRepository;
@@ -19,12 +20,16 @@ class Interactor{
         $player = $request->getPlayer();
 
         $role = $this->roleRepository->findByName($request->getRoleName());
+        if(!$role)
+            throw new RoleNotFoundException;
+        
         $playerRoles = new PlayerRoles();
         $playerRoles->addRole($role);
         $player->setRoles($playerRoles);
-        
+      
         $this->playerRepository->add($player);
         $this->playerRoleRepository->add($playerRoles);
+       
         return new Response($player);
     }
 }

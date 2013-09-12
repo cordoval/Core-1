@@ -5,8 +5,9 @@ namespace OpenTribes\Core\Player\Authenticate;
 use OpenTribes\Core\Player;
 class Response{
     protected $player;
-    public function __constrcut($player = null){
+    public function __construct($player = null){
         $this->setPlayer($player);
+      
     }
     public function getPlayer(){
         return $this->player;
