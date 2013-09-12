@@ -2,30 +2,15 @@
 namespace OpenTribes\Core;
 
 class Tile extends Entity{
-    protected $x;
-    protected $y;
-    protected $isBuildable;
+ 
+    protected $isWorkable;
     
-    public function setBuildable($isBuildable){
-        $this->isBuildable = (bool) $isBuildable;
+    public function setWorkable($isWorkable){
+        $this->isWorkable = (bool) $isWorkable;
         return $this;
     }
 
-    public function setX($x){
-        $this->x = (int)$x;
-        return $this;
-    }
-    public function setY($y){
-        $this->y = (int)$y;
-        return $this;
-    }
-    public function getX(){
-        return $this->x;
-    }
-    public function getY(){
-        return $this->y;
-    }
-    public function getBuildable(){
-        return $this->isBuildable;
+    public function getWorkable(){
+        return $this->isWorkable;
     }
 }

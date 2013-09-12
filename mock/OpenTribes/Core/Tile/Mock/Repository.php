@@ -20,7 +20,7 @@ class Repository implements RepositoryInterface{
             }
         }
     }
-    public function save(Tile $tile) {
+    public function add(Tile $tile) {
         $this->data[$tile->getId()] = $tile->asArray();
     }
     public function create() {

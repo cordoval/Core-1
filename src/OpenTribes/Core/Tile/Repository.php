@@ -6,6 +6,6 @@ interface Repository{
     public function __construct(Factory $factory);
     public function findById($id);
     public function findByName($name);
-    public function save(Tile $tile);
+    public function add(Tile $tile);
     public function create();
 }
