@@ -4,7 +4,6 @@ namespace OpenTribes\Core\Player\Login;
 
 
 use OpenTribes\Core\Player\Repository as PlayerRepository;
-use OpenTribes\Core\Player\Roles\Repository as RolesRepository;
 use OpenTribes\Core\Util\Hasher;
 use OpenTribes\Core\Player\Login\Exception\NotExists as PlayerNotFoundException;
 use OpenTribes\Core\Player\Login\Exception\Invalid as IncorrectPasswordException;
@@ -13,12 +12,10 @@ use OpenTribes\Core\Player\Login\Exception\NotActive as AccountNotActivatedExcep
 class Interactor {
 
     private $playerRepository = null;
-    private $rolesRepository = null;
     private $hasher = null;
 
-    public function __construct(PlayerRepository $playerRepo, RolesRepository $rolesRepo, Hasher $hasher) {
+    public function __construct(PlayerRepository $playerRepo, Hasher $hasher) {
         $this->playerRepository = $playerRepo;
-        $this->rolesRepository = $rolesRepo;
         $this->hasher = $hasher;
     }
 
