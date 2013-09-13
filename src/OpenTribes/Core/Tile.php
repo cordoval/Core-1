@@ -3,14 +3,14 @@ namespace OpenTribes\Core;
 
 class Tile extends Entity{
  
-    protected $isWorkable;
+    protected $accessable;
     
-    public function setWorkable($isWorkable){
-        $this->isWorkable = (bool) $isWorkable;
+    public function setAccessable($accessable){
+        $this->accessable = (bool) $accessable;
         return $this;
     }
 
-    public function getWorkable(){
-        return $this->isWorkable;
+    public function getAccessable(){
+        return $this->accessable;
     }
 }

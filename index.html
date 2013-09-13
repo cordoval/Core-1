@@ -2257,108 +2257,6 @@ In order to to login as registered user, I have to input valid informations<br /
 </div>
 <div class="feature">
 <ul class="tags">
-<li>@Account</li>
-</ul>
-<h2>
-<span class="keyword">Feature: </span>
-<span class="title">Request token</span>
-</h2>
-<p>
-In order to recover a lost password as registered user I have to input valid informations<br />
-</p>
-
-<div class="scenario">
-<h3>
-<span class="keyword">Scenario: </span>
-<span class="title">request a code with valid user</span>
-<span class="path">features/Account/request_token.feature:5</span>
-</h3>
-<ol>
-<li class="passed">
-<div class="step">
-<span class="keyword">Given </span>
-<span class="text">user with follwoing informations:</span>
-<span class="path">FeatureContext::userWithFollwoingInformations()</span>
-</div>
-<table class="argument">
-<thead>
-<tr class="row">
-<td>id</td>
-<td>username</td>
-<td>password</td>
-<td>email</td>
-</tr>
-</thead>
-<tbody>
-<tr class="row">
-<td>1</td>
-<td>BlackScorp</td>
-<td>123456</td>
-<td>test@test.de</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li class="passed">
-<div class="step">
-<span class="keyword">And </span>
-<span class="text">I'm not logged in</span>
-<span class="path">FeatureContext::iamNotLoggedIn()</span>
-</div>
-</li>
-<li class="passed">
-<div class="step">
-<span class="keyword">And </span>
-<span class="text">I have "<strong class="passed_param">Guest</strong>" roles</span>
-<span class="path">FeatureContext::iHaveRoles()</span>
-</div>
-</li>
-<li class="pending">
-<div class="step">
-<span class="keyword">When </span>
-<span class="text">I request the code with following informations</span>
-<span class="path">FeatureContext::iRequestTheCodeWithFollowingInformations()</span>
-</div>
-<table class="argument">
-<thead>
-<tr class="row">
-<td>email</td>
-</tr>
-</thead>
-<tbody>
-<tr class="row">
-<td>test@test.de</td>
-</tr>
-</tbody>
-</table>
-<pre class="backtrace">TODO: write pending definition</pre>
-</li>
-<li class="skipped">
-<div class="step">
-<span class="keyword">Then </span>
-<span class="text">a recovery mail should be created</span>
-<span class="path">FeatureContext::aRecoveryMailShouldBeCreated()</span>
-</div>
-</li>
-<li class="skipped">
-<div class="step">
-<span class="keyword">And </span>
-<span class="text">the mail should be send</span>
-<span class="path">FeatureContext::theMailShouldBeSend()</span>
-</div>
-</li>
-<li class="skipped">
-<div class="step">
-<span class="keyword">And </span>
-<span class="text">I should have a recovery code</span>
-<span class="path">FeatureContext::iShouldHaveARecoveryCode()</span>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="feature">
-<ul class="tags">
 <li>@City</li>
 </ul>
 <h2>
@@ -2388,7 +2286,7 @@ In order to recover a lost password as registered user I have to input valid inf
 <tr class="row">
 <td>id</td>
 <td>name</td>
-<td>workable</td>
+<td>accessable</td>
 </tr>
 </thead>
 <tbody>
@@ -2513,7 +2411,7 @@ In order to recover a lost password as registered user I have to input valid inf
 </tbody>
 </table>
 </li>
-<li class="pending">
+<li class="passed">
 <div class="step">
 <span class="keyword">And </span>
 <span class="text">following cities:</span>
@@ -2553,7 +2451,6 @@ In order to recover a lost password as registered user I have to input valid inf
 </tr>
 </tbody>
 </table>
-<pre class="backtrace">TODO: write pending definition</pre>
 </li>
 </ol>
 </div>
@@ -2564,26 +2461,27 @@ In order to recover a lost password as registered user I have to input valid inf
 <span class="path">features/City/create.feature:33</span>
 </h3>
 <ol>
-<li class="skipped">
+<li class="passed">
 <div class="step">
 <span class="keyword">Given </span>
-<span class="text">I'm logged in as user "<strong class="skipped_param">BlackScorp</strong>"</span>
+<span class="text">I'm logged in as user "<strong class="passed_param">BlackScorp</strong>"</span>
 <span class="path">FeatureContext::iMLoggedInAsUser()</span>
 </div>
 </li>
-<li class="skipped">
+<li class="passed">
 <div class="step">
 <span class="keyword">When </span>
-<span class="text">I create a city at location x=<strong class="skipped_param">2</strong> and y=<strong class="skipped_param">2</strong></span>
+<span class="text">I create a city at location x=<strong class="passed_param">2</strong> and y=<strong class="passed_param">2</strong></span>
 <span class="path">FeatureContext::iCreateACityAtLocationXAndY()</span>
 </div>
 </li>
-<li class="skipped">
+<li class="pending">
 <div class="step">
 <span class="keyword">Then </span>
 <span class="text">I should have a city</span>
 <span class="path">FeatureContext::iShouldHaveACity()</span>
 </div>
+<pre class="backtrace">TODO: write pending definition</pre>
 </li>
 </ol>
 </div>
@@ -2591,13 +2489,13 @@ In order to recover a lost password as registered user I have to input valid inf
 <div class="summary passed">
 <div class="counters">
 <p class="scenarios">
-29 scenarios (<strong class="passed">27 passed</strong>, <strong class="pending">2 pending</strong>)
+28 scenarios (<strong class="passed">27 passed</strong>, <strong class="pending">1 pending</strong>)
 </p>
 <p class="steps">
-142 steps (<strong class="passed">134 passed</strong>, <strong class="skipped">6 skipped</strong>, <strong class="pending">2 pending</strong>)
+135 steps (<strong class="passed">134 passed</strong>, <strong class="pending">1 pending</strong>)
 </p>
 <p class="time">
-0m3.194s
+0m3.24s
 </p>
 </div>
 <div class="switchers">

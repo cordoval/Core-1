@@ -6,7 +6,7 @@
      
     Background:
         Given following tiles:
-           | id | name | workable |
+           | id | name | accessable |
            | 1 | Grass | true |
            | 2 | Forrest | false |
            | 3 | Sea | false |

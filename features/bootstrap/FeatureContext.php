@@ -167,7 +167,7 @@ class FeatureContext implements ContextInterface
      */
     public function followingTiles(TableNode $table)
     {
-         $this->cityHelper->createTiles($table->getHash());
+         $this->cityHelper->getMapHelper()->createTiles($table->getHash());
     }
 
     /**
@@ -175,7 +175,7 @@ class FeatureContext implements ContextInterface
      */
     public function aMapWithFollowingTiles2($arg1, TableNode $table)
     {
-        $this->cityHelper->createMapWithTiles($arg1,$table->getRowsHash());
+        $this->cityHelper->getMapHelper()->createMapWithTiles($arg1,$table->getRowsHash());
     }
 
     /**
@@ -183,7 +183,8 @@ class FeatureContext implements ContextInterface
      */
     public function followingCities(TableNode $table)
     {
-        throw new PendingException();
+        $this->cityHelper->setUserRepository($this->userHelper->getUserRepository());
+        $this->cityHelper->createCities($table->getHash());
     }
 
     /**
@@ -191,7 +192,7 @@ class FeatureContext implements ContextInterface
      */
     public function iMLoggedInAsUser($arg1)
     {
-        throw new PendingException();
+       $this->cityHelper->iamUser($arg1);
     }
 
     /**
@@ -199,7 +200,7 @@ class FeatureContext implements ContextInterface
      */
     public function iCreateACityAtLocationXAndY($arg1, $arg2)
     {
-        throw new PendingException();
+       $this->cityHelper->create($arg1, $arg2);
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 namespace OpenTribes\Core;
 
-use OpenTribes\Core\Player;
-class City extends Entity{
+use OpenTribes\Core\User;
+;class City extends Entity{
     protected $x;
     protected $y;
     protected $owner;
-    public function setOwner(Player $player){
-        $this->owner = $player;
+    public function setOwner(User $user){
+        $this->owner = $user;
     }
 
     public function setX($x){

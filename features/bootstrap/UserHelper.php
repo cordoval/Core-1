@@ -107,6 +107,10 @@ class UserHelper {
             $this->userRepository->add($user);
         }
     }
+    public function getUserRepository(){
+        return $this->userRepository;
+    }
+  
 
     //Interactor tests
     /**
