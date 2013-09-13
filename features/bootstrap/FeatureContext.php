@@ -12,6 +12,7 @@ class FeatureContext implements ContextInterface
 {
    protected $userHelper;
    protected $cityHelper;
+   protected $exceptionMapper;
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -23,6 +24,7 @@ class FeatureContext implements ContextInterface
         $this->parameters = $parameters;
         $this->userHelper = new UserHelper();
         $this->cityHelper = new CityHelper();
+        $this->exceptionMapper = new ExceptionMapper();
     }
 
 //
@@ -92,11 +94,13 @@ class FeatureContext implements ContextInterface
         $this->userHelper->sendActivationCode();
     }
 
+ 
     /**
-     * @Then /^I should see an "([^"]*)" exception$/
+     * @Then /^I should see "([^"]*)"$/
      */
-    public function iShouldSeeAnException($arg1) {
-        $this->userHelper->assertException($arg1);
+    public function iShouldSee($arg1)
+    {
+         $this->userHelper->assertException($this->exceptionMapper->map($arg1));
     }
 
     /**

@@ -23,7 +23,7 @@ Scenario: login with invalid password
     When I login with following informations:
         | username | password |
         | BlackScorp | 654321  |
-    Then I should see an "OpenTribes\Core\User\Login\exception\Invalid" exception
+    Then I should see "invalid login informations" 
 
 Scenario: login with invalid usename
      Given user with follwoing informations:
@@ -34,7 +34,7 @@ Scenario: login with invalid usename
     When I login with following informations:
         | username | password |
         | Black | 654321  |
-    Then I should see an "OpenTribes\Core\User\Login\exception\NotExists" exception
+    Then I should see "username not exists"
 
 Scenario: login with not active account
      Given user with follwoing informations:
@@ -45,7 +45,7 @@ Scenario: login with not active account
     When I login with following informations:
         | username | password |
         | BlackScorp | 123456  |
-    Then I should see an "OpenTribes\Core\User\Login\exception\NotActive" exception
+    Then I should see "account is not active" 
 
 Scenario: login with empty username
      Given user with follwoing informations:
@@ -56,7 +56,7 @@ Scenario: login with empty username
     When I login with following informations:
         | username | password |
         |  | 123456  |
-    Then I should see an "OpenTribes\Core\User\Login\Exception\NotExists" exception
+    Then I should see "username not exists"
 
 Scenario: login with short username
      Given user with follwoing informations:
@@ -67,7 +67,7 @@ Scenario: login with short username
     When I login with following informations:
         | username | password |
         | B | 123456  |
-    Then I should see an "OpenTribes\Core\User\Login\Exception\NotExists" exception
+    Then I should see "username not exists" 
 
 Scenario: login with long username
      Given user with follwoing informations:
@@ -78,7 +78,7 @@ Scenario: login with long username
     When I login with following informations:
         | username | password |
         | BlackScorpBlackScorpBlackScorpBlackScorpBlackScorpBlackScorp | 123456  |
-    Then I should see an "OpenTribes\Core\User\Login\Exception\NotExists" exception
+    Then I should see "username not exists" 
 
 Scenario: login with invalid username
      Given user with follwoing informations:
@@ -89,7 +89,7 @@ Scenario: login with invalid username
     When I login with following informations:
         | username | password |
         | B!@ckS@rp | 123456  |
-    Then I should see an "OpenTribes\Core\User\Login\Exception\NotExists" exception
+    Then I should see "username not exists"
 
 Scenario: login with empty password
      Given user with follwoing informations:
@@ -100,7 +100,7 @@ Scenario: login with empty password
     When I login with following informations:
         | username | password |
         | BlackScorp |   |
-    Then I should see an "OpenTribes\Core\User\Login\Exception\Invalid" exception
+    Then I should see "invalid login informations"
 
 Scenario: login with short password
      Given user with follwoing informations:
@@ -111,4 +111,4 @@ Scenario: login with short password
     When I login with following informations:
         | username | password |
         | BlackScorp | 123 |
-    Then I should see an "OpenTribes\Core\User\Login\Exception\Invalid" exception
+    Then I should see "invalid login informations"

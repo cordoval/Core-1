@@ -35,7 +35,7 @@ class UserHelper {
     protected $exception = null;
     protected $mailer = null;
     protected $userRolesRepository;
-
+ 
     public function __construct() {
         $this->roleRepository = new RoleRepository();
         $this->userRepository = new UserRepository();
