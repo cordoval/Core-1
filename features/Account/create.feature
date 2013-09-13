@@ -18,7 +18,7 @@ Scenario: username empty
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         |  | 123456  | 123456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Emptyexception" exception
+    Then I should see an "OpenTribes\Core\User\exception\Username\Emptyexception" exception
 
 Scenario: username too short
     Given I'm not registered user
@@ -26,7 +26,7 @@ Scenario: username too short
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | b | 123456  | 123456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Short" exception
+    Then I should see an "OpenTribes\Core\User\exception\Username\Short" exception
 
 Scenario: username too long
     Given I'm not registered user
@@ -34,7 +34,7 @@ Scenario: username too long
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | blackscorpblackscorpblackscorpblackscorp | 123456  | 123456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Long" exception
+    Then I should see an "OpenTribes\Core\User\exception\Username\Long" exception
 
 Scenario: username has invalid character
     Given I'm not registered user
@@ -42,7 +42,7 @@ Scenario: username has invalid character
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | b@ckscorp! | 123456  | 123456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Username\Invalid" exception
+    Then I should see an "OpenTribes\Core\User\exception\Username\Invalid" exception
 
 Scenario: username already exists
     Given I'm not registered user
@@ -53,7 +53,7 @@ Scenario: username already exists
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp | 123456  | 123456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\Create\exception\Username\Exists" exception
+    Then I should see an "OpenTribes\Core\User\Create\exception\Username\Exists" exception
 
 Scenario: empty email
     Given I'm not registered user
@@ -61,7 +61,7 @@ Scenario: empty email
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp | 132456 | 132456 |  | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Email\Emptyexception" exception
+    Then I should see an "OpenTribes\Core\User\exception\Email\Emptyexception" exception
 
 Scenario: email already exists
     Given I'm not registered user
@@ -72,7 +72,7 @@ Scenario: email already exists
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | Black | 123456  | 123456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\Create\exception\Email\Exists" exception
+    Then I should see an "OpenTribes\Core\User\Create\exception\Email\Exists" exception
 
 Scenario: email is invalid
     Given I'm not registered user
@@ -80,7 +80,7 @@ Scenario: email is invalid
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | blackscorp | 123456  | 123456 | test@test | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Email\Invalid" exception
+    Then I should see an "OpenTribes\Core\User\exception\Email\Invalid" exception
 
 Scenario: empty password
     Given I'm not registered user
@@ -88,7 +88,7 @@ Scenario: empty password
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp |  | 132456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Password\Emptyexception" exception
+    Then I should see an "OpenTribes\Core\User\exception\Password\Emptyexception" exception
 
 Scenario: password too short
     Given I'm not registered user
@@ -96,7 +96,7 @@ Scenario: password too short
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp | 123 | 132456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\exception\Password\Short" exception
+    Then I should see an "OpenTribes\Core\User\exception\Password\Short" exception
 
 Scenario: incorrect password confirm 
     Given I'm not registered user
@@ -104,7 +104,7 @@ Scenario: incorrect password confirm
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp | 123456  | 132456 | test@test.de | test@test.de |
-    Then I should see an "OpenTribes\Core\Player\Create\exception\Password\Confirm" exception
+    Then I should see an "OpenTribes\Core\User\Create\exception\Password\Confirm" exception
 
 Scenario: incorrect email confirm 
     Given I'm not registered user
@@ -112,4 +112,4 @@ Scenario: incorrect email confirm
     When I register with following informations:
         | username | password | password_confirm | email | email_confirm |
         | BlackScorp | 123456  | 123456 | test@test.de | test@test1.de |
-    Then I should see an "OpenTribes\Core\Player\Create\exception\Email\Confirm" exception
+    Then I should see an "OpenTribes\Core\User\Create\exception\Email\Confirm" exception

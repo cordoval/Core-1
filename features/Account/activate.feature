@@ -12,7 +12,7 @@ Scenario: activate valid account
         | username | activation_code |
         | BlackScorp | qwerty  | 
     Then I should be activated
-    And I should have "Player" roles
+    And I should have "User" roles
 
 Scenario: invalid activation code
     Given user with follwoing informations:
@@ -23,7 +23,7 @@ Scenario: invalid activation code
     When I activate account with following informations:
         | username | activation_code |
         | BlackScorp | 123456  | 
-    Then I should see an "OpenTribes\Core\Player\Activate\exception\Invalid" exception
+    Then I should see an "OpenTribes\Core\User\Activate\exception\Invalid" exception
    
 Scenario: user not exists
     Given user with follwoing informations:
@@ -34,7 +34,7 @@ Scenario: user not exists
     When I activate account with following informations:
         | username | activation_code |
         | Dummy | 123456  | 
-    Then I should see an "OpenTribes\Core\Player\Activate\exception\NotExists" exception
+    Then I should see an "OpenTribes\Core\User\Activate\exception\NotExists" exception
 
 Scenario: user already active
     Given user with follwoing informations:
@@ -45,4 +45,4 @@ Scenario: user already active
     When I activate account with following informations:
         | username | activation_code |
         | BlackScorp | 123456  | 
-    Then I should see an "OpenTribes\Core\Player\Activate\exception\Active" exception
+    Then I should see an "OpenTribes\Core\User\Activate\exception\Active" exception
