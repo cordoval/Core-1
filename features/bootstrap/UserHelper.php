@@ -1,51 +1,54 @@
 <?php
 
-use OpenTribes\Core\Player;
-use OpenTribes\Core\Player\Roles as PlayerRoles;
+use OpenTribes\Core\User;
+use OpenTribes\Core\User\Roles as UserRoles;
 use OpenTribes\Core\Role\Mock\Repository as RoleRepository;
-use OpenTribes\Core\Player\Roles\Mock\Repository as PlayerRolesRepository;
-use OpenTribes\Core\Player\Mock\Repository as PlayerRepository;
+use OpenTribes\Core\User\Roles\Mock\Repository as UserRolesRepository;
+use OpenTribes\Core\User\Mock\Repository as UserRepository;
 use OpenTribes\Core\Util\Mock\Hasher as MockHasher;
 use OpenTribes\Core\Util\Mock\QwertyGenerator as MockCodeGenerator;
 use OpenTribes\Core\Util\Mock\Filemailer as MockMailer;
 use OpenTribes\Core\Role;
-use OpenTribes\Core\Player\Create\Request as PlayerCreateRequest;
-use OpenTribes\Core\Player\Create\Interactor as PlayerCreateInteractor;
-use OpenTribes\Core\Player\Login\Request as PlayerLoginRequest;
-use OpenTribes\Core\Player\Login\Interactor as PlayerLoginInteractor;
-use OpenTribes\Core\Player\ActivationMail\Create\Request as CreateActivationMailRequest;
-use OpenTribes\Core\Player\ActivationMail\Create\Interactor as CreateActivationMailInteractor;
-use OpenTribes\Core\Player\ActivationMail\Send\Request as SendActivationMailRequest;
-use OpenTribes\Core\Player\ActivationMail\Send\Interactor as SendActivationMailInteractor;
-use OpenTribes\Core\Player\Activate\Request as PlayerActivateRequest;
-use OpenTribes\Core\Player\Activate\Interactor as PlayerActivateInteractor;
+use OpenTribes\Core\User\Create\Request as UserCreateRequest;
+use OpenTribes\Core\User\Create\Interactor as UserCreateInteractor;
+use OpenTribes\Core\User\Login\Request as UserLoginRequest;
+use OpenTribes\Core\User\Login\Interactor as UserLoginInteractor;
+use OpenTribes\Core\User\Authenticate\Request as UserAuthenticateRequest;
+use OpenTribes\Core\User\Authenticate\Interactor as UserAuthenticateInteractor;
+use OpenTribes\Core\User\ActivationMail\Create\Request as CreateActivationMailRequest;
+use OpenTribes\Core\User\ActivationMail\Create\Interactor as CreateActivationMailInteractor;
+use OpenTribes\Core\User\ActivationMail\Send\Request as SendActivationMailRequest;
+use OpenTribes\Core\User\ActivationMail\Send\Interactor as SendActivationMailInteractor;
+use OpenTribes\Core\User\Activate\Request as UserActivateRequest;
+use OpenTribes\Core\User\Activate\Interactor as UserActivateInteractor;
 use OpenTribes\Core\Entity\Factory as EntityFactory;
+
 require_once 'vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
 
 class UserHelper {
 
     protected $user;
     protected $roleRepository;
-    protected $playerRepository;
+    protected $userRepository;
     protected $response;
     protected $codeGenerator;
     protected $exception = null;
     protected $mailer = null;
+    protected $userRolesRepository;
 
     public function __construct() {
         $this->roleRepository = new RoleRepository();
-        $this->playerRepository = new PlayerRepository(new EntityFactory(new Player()));
-        $this->playerRolesRepository = new PlayerRolesRepository();
-        
+        $this->userRepository = new UserRepository();
+        $this->userRolesRepository = new UserRolesRepository();
+
         $this->hasher = new MockHasher();
         $this->codeGenerator = new MockCodeGenerator();
         $this->mailer = new MockMailer();
         $this->initRoles();
-     
     }
-  
-     // Default Methods to initialize Data
-  
+
+    // Default Methods to initialize Data
+
     /**
      * Method to Init base Roles
      */
@@ -55,28 +58,27 @@ class UserHelper {
         $roleId++;
         $guest->setId($roleId);
         $guest->setName('Guest');
-
-        $player = new Role();
+        $this->roleRepository->add($guest);
+        $user = new Role();
         $roleId++;
-        $player->setId($roleId);
-        $player->setName('Player');
-
+        $user->setId($roleId);
+        $user->setName('User');
+        $this->roleRepository->add($user);
         $admin = new Role();
         $roleId++;
         $admin->setId($roleId);
         $admin->setName('Admin');
-
-        $this->roleRepository->save($guest);
-        $this->roleRepository->save($player);
-        $this->roleRepository->save($admin);
+        $this->roleRepository->add($admin);
     }
+
     /**
      * Method to create empty user 
      */
     public function newUser() {
-        $this->user = new Player();
-        $this->user->setRoles(new PlayerRoles());
+        $this->user = new User();
+        $this->user->setRoles(new UserRoles());
     }
+
     /**
      * Methode to add a role to current user
      * @param String $name Rolename
@@ -88,43 +90,42 @@ class UserHelper {
         //Set Roles
         $this->user->getRoles()->addRole($role);
     }
+
     /**
      * Method to create a DumpUsers, to simulate UserDatabase
      * @param array $data Userdata
      */
     public function createDumpUser(array $data) {
-
+        $factory = new EntityFactory(new User());
         foreach ($data as $row) {
-            $player = new Player();
-            $player->setUsername($row['username']);
-            $player->setId($row['id']);
-            $player->setPassword($this->hasher->hash($row['password']));
-            $player->setEmail($row['email']);
-            $player->setActivationCode($row['activation_code']);
-            $roles = new PlayerRoles();
-            $roles->addRole($this->roleRepository->findByName('Player'));
-            $player->setRoles($roles);
-            $this->playerRepository->save($player);
+            $user = $factory->createFromArray($row);
+            //hash password
+            $user->setPasswordHash($this->hasher->hash($user->getPassword()));
+            $roles = new UserRoles();
+
+            $user->setRoles($roles);
+            $this->userRepository->add($user);
         }
-        
     }
+
     //Interactor tests
     /**
-     * Method to create a use with an interactor
+     * Method to create a user with an interactor
      * @param array $data Userdata
      */
     public function create(array $data) {
         foreach ($data as $row) {
-            $request = new PlayerCreateRequest($row['username'], $row['password'], $row['email'], $row['password_confirm'], $row['email_confirm']);
+            $request = new UserCreateRequest($row['username'], $row['password'], $row['email'], $row['password_confirm'], $row['email_confirm'], 'Guest');
         }
 
-        $interactor = new PlayerCreateInteractor($this->playerRepository, $this->playerRolesRepository, $this->hasher, $this->codeGenerator);
+        $interactor = new UserCreateInteractor($this->userRepository, $this->roleRepository, $this->userRolesRepository, $this->hasher);
         try {
             $this->response = $interactor($request);
         } catch (\Exception $e) {
             $this->exception = $e;
         }
     }
+
     /**
      * Method to login as registered User with an interactor
      * @param array $data Userdata
@@ -132,71 +133,80 @@ class UserHelper {
     public function login(array $data) {
 
         foreach ($data as $row) {
-            $request = new PlayerLoginRequest($row['username'], $row['password']);
+            $request = new UserLoginRequest($row['username'], $row['password']);
         }
-
-        $interactor = new PlayerLoginInteractor($this->playerRepository, $this->playerRolesRepository, $this->hasher);
+        $interactor = new UserLoginInteractor($this->userRepository, $this->hasher);
 
         try {
             $this->response = $interactor($request);
+            $authRequest = new UserAuthenticateRequest($this->response->getUser(), 'User');
+            $authInteractor = new UserAuthenticateInteractor($this->userRepository, $this->roleRepository, $this->userRolesRepository);
+        
+            $this->response = $authInteractor($authRequest);
+        
         } catch (\Exception $e) {
             $this->exception = $e;
         }
     }
+
     /**
      * Method to send an Activation Mail with an interactor
-     * it use the response of PlayerCreateInteractor
+     * it use the response of UserCreateInteractor
      */
     public function sendActivationCode() {
-        $player = $this->response->getMailView()->getPlayer();
+        $user = $this->response->getMailView()->getUser();
 
-        $request = new SendActivationMailRequest($this->response->getMailView(), $player->getEmail(), $player->getUsername(), 'Activate Account');
+        $request = new SendActivationMailRequest($this->response->getMailView(), $user->getEmail(), $user->getUsername(), 'Activate Account');
         $interactor = new SendActivationMailInteractor($this->mailer);
         $this->response = $interactor($request);
         assertTrue($this->response->getResult());
     }
+
     /**
      * Method to activate account and set a role for an active use with an interactor
      * @param array $data Userdata
      */
     public function activateAccount(array $data) {
-        $role = $this->roleRepository->findByName('Player');
         foreach ($data as $row) {
-            $request = new PlayerActivateRequest($row['username'], $row['activation_code'], $role);
+            $request = new UserActivateRequest($row['username'], $row['activation_code'], 'User');
         }
-
-        $interactor = new PlayerActivateInteractor($this->playerRepository, $this->playerRolesRepository);
+        $interactor = new UserActivateInteractor($this->userRepository, $this->roleRepository, $this->userRolesRepository);
         try {
             $this->response = $interactor($request);
         } catch (\Exception $e) {
             $this->exception = $e;
         }
     }
+
     //Assertion Methods for testing
     /**
      * Assert Login was successfull
      */
     public function assertIsLoginResponse() {
-        assertInstanceOf('\OpenTribes\Core\Player\Login\Response', $this->response);
-        assertNotNull($this->response->getPlayer()->getId());
+        assertInstanceOf('\OpenTribes\Core\User\Authenticate\Response', $this->response);
+
+        assertNotNull($this->response->getUser()->getId());
     }
+
     /**
      * Assert Create Account was successfull
      */
     public function assertIsCreateResponse() {
-        assertInstanceOf('\OpenTribes\Core\Player\Create\Response', $this->response);
-        assertNotNull($this->playerRepository->findById($this->response->getPlayer()->getId()));
+        assertInstanceOf('\OpenTribes\Core\User\Create\Response', $this->response);
+        assertNotNull($this->userRepository->findById($this->response->getUser()->getId()));
     }
+
     /**
      * Assert an activation code mail was created with an interactor
      */
     public function assertHasActivationCode() {
-        $request = new CreateActivationMailRequest($this->response->getPlayer());
-        $interactor = new CreateActivationMailInteractor($this->playerRepository, $this->codeGenerator);
+        $request = new CreateActivationMailRequest($this->response->getUser());
+        $interactor = new CreateActivationMailInteractor($this->userRepository, $this->codeGenerator);
         $this->response = $interactor($request);
-        assertInstanceOf('\OpenTribes\Core\Player\ActivationMail\Create\Response', $this->response);
-        assertNotNull($this->response->getMailView()->getPlayer()->getActivationCode());
+        assertInstanceOf('\OpenTribes\Core\User\ActivationMail\Create\Response', $this->response);
+        assertNotNull($this->response->getMailView()->getUser()->getActivationCode());
     }
+
     /**
      * Assert a specific exception
      * @param String $exception Exception name
@@ -205,21 +215,24 @@ class UserHelper {
         assertNotNull($this->exception);
         assertInstanceOf($exception, $this->exception);
     }
+
     /**
      * Assert account is activated
      */
     public function assertActivated() {
-        $player = $this->response->getPlayer();
-        assertInstanceOf('\OpenTribes\Core\Player\Activate\Response', $this->response);
-        assertEmpty($player->getActivationCode());
+        $user = $this->response->getUser();
+        assertInstanceOf('\OpenTribes\Core\User\Activate\Response', $this->response);
+        assertEmpty($user->getActivationCode());
     }
+
     /**
      * Assert account has role
      * @param String $role Role
      */
     public function assertHasRole($role) {
-        $player = $this->response->getPlayer();
-        assertTrue($player->getRoles()->hasRole($role));
+        $user = $this->response->getUser();
+     
+        assertTrue($user->getRoles()->hasRole($role));
     }
 
 }
